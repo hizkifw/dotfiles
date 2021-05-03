@@ -12,6 +12,7 @@
     ~/.gitconfig: dot/gitconfig
     ~/.zshrc: dot/zshrc
     ~/.zprofile: dot/zprofile
+    ~/.profile: dot/profile
     ~/.oh-my-zsh: dot/oh-my-zsh
     ~/.config/kitty: dot/kitty
 
