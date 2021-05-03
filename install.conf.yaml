@@ -8,7 +8,12 @@
     ~/.tmux.conf: dot/tmux.conf
     ~/.vim: dot/vim
     ~/.xmonad: dot/xmonad
+    ~/.xinitrc: dot/xinitrc
     ~/.gitconfig: dot/gitconfig
+    ~/.zshrc: dot/zshrc
+    ~/.zprofile: dot/zprofile
+    ~/.oh-my-zsh: dot/oh-my-zsh
+    ~/.config/kitty: dot/kitty
 
 - create:
     - ~/bin

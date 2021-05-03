@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# https://brianbuccola.com/how-to-install-xmonad-and-xmobar-via-stack/
+
+which stack >/dev/null || curl -sSL https://get.haskellstack.org/ | sh
+stack setup
+stack install

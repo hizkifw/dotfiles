@@ -11,3 +11,6 @@
 [submodule "dot/xmonad/xmonad-contrib-git"]
 	path = dot/xmonad/xmonad-contrib-git
 	url = https://github.com/xmonad/xmonad-contrib
+[submodule "dot/oh-my-zsh"]
+	path = dot/oh-my-zsh
+	url = https://github.com/ohmyzsh/ohmyzsh.git
