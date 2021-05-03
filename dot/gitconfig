@@ -1,0 +1,11 @@
+[user]
+        email = felix@hizkifw.me
+        name = Hizkia Felix Winata
+        signingkey = 157B7246AFFEC65E837202FCD1AF321B0DFAB3E2
+
+[core]
+        editor = vim
+[commit]
+        gpgsign = true
+[init]
+        defaultBranch = main

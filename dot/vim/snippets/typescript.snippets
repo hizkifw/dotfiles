@@ -1,0 +1,41 @@
+snippet nestmodule NestJS Module
+	import { Module } from '@nestjs/common';
+
+	@Module({
+		${2}
+	});
+	export class ${1}Module {}
+
+snippet nestservice NestJS Service
+	import { Injectable, Logger } from '@nestjs/common';
+
+	@Injectable()
+	export class ${1}Service {
+		private readonly logger: Logger = new Logger(${1}Service.name);
+		constructor(${2}) {}
+	}
+
+snippet nestcontroller NestJS Controller
+	import { Controller } from '@nestjs/common';
+
+	@Controller('${1}')
+	export class ${2}Controller {
+		constructor(${3}) {}
+	}
+
+snippet nestguard NestJS Guard
+	import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
+
+	@Injectable()
+	export class ${1}Guard implements CanActivate {
+		async canActivate(context: ExecutionContext): Promise<boolean> {
+			return false;
+		}
+	}
+
+snippet nextapi Next API Route
+	import type { NextApiRequest, NextApiResponse } from 'next';
+
+	export default (req: NextApiRequest, res: NextApiResponse) => {
+		${0}
+	}

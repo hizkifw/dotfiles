@@ -1,0 +1,18 @@
+- defaults:
+    link:
+      relink: true
+
+- clean: ['~']
+
+- link:
+    ~/.tmux.conf: dot/tmux.conf
+    ~/.vim: dot/vim
+    ~/.xmonad: dot/xmonad
+    ~/.gitconfig: dot/gitconfig
+
+- create:
+    - ~/bin
+    - ~/workspace
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]

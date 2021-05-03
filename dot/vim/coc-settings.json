@@ -1,0 +1,6 @@
+{
+  "snippets.userSnippetsDirectory": "~/.vim/snippets",
+  "suggest.autoTrigger": "trigger",
+  "suggest.timeout": 100,
+  "suggest.minTriggerInputLength": 0
+}

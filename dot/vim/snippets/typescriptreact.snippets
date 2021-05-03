@@ -1,0 +1,82 @@
+snippet imr import React from 'react'
+	import React from 'react'
+
+snippet cmp React function component
+	export type ${0}Props = {};
+
+	const ${0} = (props: ${0}Props) => {
+		return null;
+	}
+
+	export default ${0};
+
+snippet uef useEffect hook
+	React.useEffect(() => {
+		${2}
+	}, [${1}]);
+
+snippet ust useState hook
+	const [${1:name}, set${1/(.)(.*)/${1:/upcase}${2}/}] = React.useState(${2:null});
+
+snippet nextapp Next Custom App
+	import type { AppProps } from 'next/app';
+
+	const NextApp = ({ Component, pageProps }: AppProps) => (
+		<Component {...pageProps} />
+	);
+
+	export default NextApp;
+
+snippet nextdoc Next Custom Document
+	import Document, { DocumentContext, Html, Head, Main, NextScript } from 'next/document';
+
+	class MyDocument extends Document {
+		static async getInitialProps(ctx: DocumentContext) {
+			const initialProps = await Document.getInitialProps(ctx);
+			return { ...initialProps };
+		}
+
+		render() {
+			return (
+				<Html>
+					<Head />
+					<body>
+						<Main />
+						<NextScript />
+					</body>
+				</Html>
+			);
+		}
+	}
+
+	export default MyDocument
+
+snippet context React context
+	import React from 'react';
+
+	type ${1}ContextType = {
+		//
+	}
+
+	const ${1}Context = React.createContext<${1}ContextType>({
+		//
+	});
+
+	export default ${1}Context;
+
+snippet provider React context provider
+	import React from 'react';
+	import ${0}Context from './${0}Context';
+
+	const ${0}Provider = (props: any) => {
+		return (
+			<${0}Context.Provider
+				value={{
+					//
+				}}
+				{...props}
+			/>
+		);
+	}
+
+	export default ${0}Provider;
