@@ -378,7 +378,10 @@ function! ShowDocIfNoDiagnostic(timer_id)
 endfunction
 
 function! s:show_hover_doc()
-  call timer_start(100, 'ShowDocIfNoDiagnostic')
+  let floatblacklist = ['vim', 'help']
+  if (index(floatblacklist, &ft) < 0 || !coc#rpc#ready())
+    silent! call timer_start(100, 'ShowDocIfNoDiagnostic')
+  endif
 endfunction
 
 autocmd CursorHoldI * :call <SID>show_hover_doc()
