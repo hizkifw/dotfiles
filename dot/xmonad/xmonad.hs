@@ -1,12 +1,24 @@
+import Graphics.X11.ExtraTypes.XF86
+
 import System.IO
 import System.Exit
+
 import XMonad
+
+import XMonad.Hooks.ManageDocks
+
+import XMonad.Layout.Fullscreen
+import XMonad.Layout.Grid
+import XMonad.Layout.NoBorders
+import XMonad.Layout.ResizableTile
+import XMonad.Layout.Spacing
+import XMonad.Layout.TwoPane
+
 import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
-import XMonad.Layout.ResizableTile
-import Graphics.X11.ExtraTypes.XF86
-import qualified XMonad.StackSet as W
+
 import qualified Data.Map as M
+import qualified XMonad.StackSet as W
 
 --
 -- basic configuration
@@ -24,6 +36,23 @@ myStartupHook :: X ()
 myStartupHook = do
   spawnOnce "nitrogen --restore &"
   spawnOnce "picom --experimental-backends &"
+
+--
+-- layout
+--
+
+nmaster = 1
+delta = 1/10
+ratio = 1/2
+
+myLayoutHook =
+  smartBorders $
+  avoidStruts $
+  tiled
+  ||| twopane
+  where
+    tiled = ResizableTall nmaster delta ratio []
+    twopane = TwoPane delta ratio
 
 --
 -- keybindings
@@ -66,9 +95,11 @@ myKeys config@(XConfig {modMask = modKey}) = M.fromList $ [
 
 main = do
   xmproc <- spawnPipe ("xmobar " ++ myXmobarrc)
-  xmonad def {
+
+  xmonad $ fullscreenSupport $ def {
     modMask     = myModMask,
     terminal    = myTerminal,
     keys        = myKeys,
-    startupHook = myStartupHook
+    startupHook = myStartupHook,
+    layoutHook  = myLayoutHook
   }
