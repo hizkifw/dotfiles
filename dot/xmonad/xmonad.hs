@@ -5,6 +5,8 @@ import System.Exit
 
 import XMonad
 
+import XMonad.Actions.SpawnOn
+
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 
@@ -25,9 +27,10 @@ import qualified XMonad.StackSet as W
 -- basic configuration
 --
 
-myModMask   = mod1Mask
-myTerminal  = "kitty"
-myXmobarrc  = "~/.xmonad/xmobar.hs"
+myModMask    = mod1Mask
+myTerminal   = "kitty"
+myXmobarrc   = "~/.xmonad/xmobar.hs"
+myWorkspaces = map show $ [1..9] ++ [0]
 
 --
 -- startup
@@ -37,6 +40,25 @@ myStartupHook :: X ()
 myStartupHook = do
   spawnOnce "nitrogen --restore &"
   spawnOnce "picom --experimental-backends &"
+  spawnOn "1" "brave"
+  spawnOn "9" "discord"
+
+--
+-- manage hook - window management
+--
+
+myManageHook = manageSpawn <+> composeAll [
+    className =? "discord" --> doShift "9"
+  ]
+
+--
+-- log hook - to update xmobar's StdinReader
+--
+
+myLogHook h =
+  dynamicLogWithPP $ def {
+    ppOutput = hPutStrLn h
+  }
 
 --
 -- layout
@@ -54,15 +76,6 @@ myLayoutHook =
   where
     tiled = ResizableTall nmaster delta ratio []
     twopane = TwoPane delta ratio
-
---
--- log hook - to update xmobar's StdinReader
---
-
-myLogHook h =
-  dynamicLogWithPP $ def {
-    ppOutput = hPutStrLn h
-  }
 
 --
 -- keybindings
@@ -99,7 +112,7 @@ myKeys config@(XConfig {modMask = modKey}) = M.fromList $ [
   ] ++
   [ -- magic code for workspace switching
     ((modKey .|. m, k), windows $ f i)
-    | (i, k) <- zip (XMonad.workspaces config) [xK_1 .. xK_9]
+    | (i, k) <- zip (XMonad.workspaces config) $ [xK_1 .. xK_9] ++ [xK_0]
     , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]
   ]
 
@@ -115,5 +128,7 @@ main = do
       keys        = myKeys,
       startupHook = myStartupHook,
       layoutHook  = myLayoutHook,
-      logHook     = myLogHook $ xmproc
+      logHook     = myLogHook $ xmproc,
+      manageHook  = myManageHook,
+      workspaces  = myWorkspaces
     }
