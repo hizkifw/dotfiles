@@ -5,6 +5,7 @@ import System.Exit
 
 import XMonad
 
+import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 
 import XMonad.Layout.Fullscreen
@@ -55,6 +56,15 @@ myLayoutHook =
     twopane = TwoPane delta ratio
 
 --
+-- log hook - to update xmobar's StdinReader
+--
+
+myLogHook h =
+  dynamicLogWithPP $ def {
+    ppOutput = hPutStrLn h
+  }
+
+--
 -- keybindings
 --
 
@@ -96,10 +106,14 @@ myKeys config@(XConfig {modMask = modKey}) = M.fromList $ [
 main = do
   xmproc <- spawnPipe ("xmobar " ++ myXmobarrc)
 
-  xmonad $ fullscreenSupport $ def {
-    modMask     = myModMask,
-    terminal    = myTerminal,
-    keys        = myKeys,
-    startupHook = myStartupHook,
-    layoutHook  = myLayoutHook
-  }
+  xmonad .
+    fullscreenSupport .
+    docks $
+    def {
+      modMask     = myModMask,
+      terminal    = myTerminal,
+      keys        = myKeys,
+      startupHook = myStartupHook,
+      layoutHook  = myLayoutHook,
+      logHook     = myLogHook $ xmproc
+    }

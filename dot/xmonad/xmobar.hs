@@ -3,10 +3,18 @@ Config {
   position = BottomW C 100,
   bgColor  = "#131313",
   commands = [
-    Run Date "%a %Y-%m-%d %H:%M:%S" "date" 10
---    Run Com "cat" "/sys/class/power_supply/BAT0/capacity" "battery" 10,
+    Run Date "%a %Y-%m-%d %H:%M:%S" "date" 10,
+    Run Battery [
+      "-t", "<acstatus> <left>% <timeleft>",
+      "--",
+      "-O", "AC",
+      "-o", "Bat",
+      "-h", "green",
+      "-l", "red"
+    ] 10,
+    Run StdinReader
   ],
   sepChar  = "%",
   alignSep = "}{"
-  template = "}{%date%"
+  template = "%StdinReader% }{ %date% | %battery%"
 }
