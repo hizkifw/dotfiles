@@ -12,6 +12,7 @@ fi
 export SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh
 
 # Autostart X if logged in on tty1
-if [[ "$(tty)" = "/dev/tty1" ]]; then
-  pgrep xmonad || startx
+if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+  sleep 1
+  startx
 fi
