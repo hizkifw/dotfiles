@@ -202,6 +202,10 @@ nmap <leader>sl <C-w>L
 nmap <leader>sk <C-w>K
 nmap <leader>sj <C-w>J
 nmap <leader>sh <C-w>H
+nmap <up> :resize +2<cr>
+nmap <down> :resize -2<cr>
+nmap <right> :vertical resize +2<cr>
+nmap <left> :vertical resize -2<cr>
 " Spellcheck
 map <leader>sc :setlocal spell!<cr>
 " Yank to end of line
@@ -225,26 +229,26 @@ inoremap # X<bs>#
 let g:yankdir = vimhome . '/temp/yankdir'
 
 function! SaveYankedText()
-  call writefile(getreg('0', 1, 1), g:yankdir . '/0', "b")
-  call writefile(getreg('"', 1, 1), g:yankdir . '/q', "b")
+call writefile(getreg('0', 1, 1), g:yankdir . '/0', "b")
+call writefile(getreg('"', 1, 1), g:yankdir . '/q', "b")
 endfunction
 function! LoadYankedText()
-  call setreg('0', readfile(g:yankdir . '/0'))
-  call setreg('"', readfile(g:yankdir . '/q'))
+call setreg('0', readfile(g:yankdir . '/0'))
+call setreg('"', readfile(g:yankdir . '/q'))
 endfunction
 function! PutYankedText(key)
-  call LoadYankedText()
-  return a:key
+call LoadYankedText()
+return a:key
 endfunction
 
 if !isdirectory(g:yankdir)
-    call mkdir(g:yankdir, "", 0700)
+  call mkdir(g:yankdir, "", 0700)
 endif
 
 augroup PersistentYank
-  autocmd!
-  autocmd TextYankPost * call SaveYankedText()
-  autocmd FocusGained * call LoadYankedText()
+autocmd!
+autocmd TextYankPost * call SaveYankedText()
+autocmd FocusGained * call LoadYankedText()
 augroup END
 
 nnoremap <silent><expr> <leader>p PutYankedText("p")
@@ -308,17 +312,17 @@ let g:closetag_filetypes = 'html,xhtml,phtml'
 let g:closetag_xhtml_filetypes = 'xhtml,jsx,tsx'
 let g:closetag_emptyTags_caseSensitive = 1
 let g:closetag_regions = {
-    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
-    \ 'javascript.jsx': 'jsxRegion',
-    \ 'typescriptreact': 'jsxRegion,tsxRegion',
-    \ 'javascriptreact': 'jsxRegion',
-    \ }
+  \ 'typescript.tsx': 'jsxRegion,tsxRegion',
+  \ 'javascript.jsx': 'jsxRegion',
+  \ 'typescriptreact': 'jsxRegion,tsxRegion',
+  \ 'javascriptreact': 'jsxRegion',
+  \ }
 let g:closetag_shortcut = '>'
 
 " DetectIndent
 augroup DetectIndent
-    autocmd!
-    autocmd BufReadPost * DetectIndent
+  autocmd!
+  autocmd BufReadPost * DetectIndent
 augroup END
 
 " Prettier every file save
@@ -334,11 +338,11 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 set updatetime=300
 set hidden
 let g:coc_global_extensions = [
-      \   'coc-tsserver',
-      \   'coc-snippets',
-      \   'coc-go',
-      \   'coc-python'
-      \ ]
+    \   'coc-tsserver',
+    \   'coc-snippets',
+    \   'coc-go',
+    \   'coc-python'
+    \ ]
 
 " close all popups on esc
 nnoremap <silent> <esc> :call coc#float#close_all()<cr><esc>
