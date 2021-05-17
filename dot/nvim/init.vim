@@ -10,11 +10,7 @@
 set bs=2
 
 " Set .vim directory
-if has("win32")
-    let vimhome = $HOME . '/vimfiles'
-else
-    let vimhome = $HOME . '/.vim'
-endif
+let vimhome = $HOME . '/.config/nvim'
 if !isdirectory(vimhome . '/temp')
     call mkdir(vimhome . '/temp', "", 0700)
 endif
@@ -84,19 +80,10 @@ if $COLORTERM == 'gnome-terminal' || $VIM_COLORFUL == 1
     set t_ut=
 endif
 
-if has("gui_running")
-    " GUI font
-    set guifont=Source_Code_Pro
-    " Remove gVim toolbars
-    set guioptions -=T
-    set guioptions -=m
-endif
 " Show line numbers
 set number
 " Vertical cursor margin
 set so=5
-" Column width marker
-" set colorcolumn=80,120
 " Show vim commands
 set showcmd
 " Highlight current line
@@ -315,7 +302,19 @@ vmap <C-_> <Plug>NERDCommenterToggle<CR>gv
 nmap ; <Plug>(easymotion-s)
 
 " vim-closetag
-let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.js'
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.jsx,*.tsx,*.js'
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx'
+let g:closetag_filetypes = 'html,xhtml,phtml'
+let g:closetag_xhtml_filetypes = 'xhtml,jsx,tsx'
+let g:closetag_emptyTags_caseSensitive = 1
+let g:closetag_regions = {
+    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
+    \ 'javascript.jsx': 'jsxRegion',
+    \ 'typescriptreact': 'jsxRegion,tsxRegion',
+    \ 'javascriptreact': 'jsxRegion',
+    \ }
+let g:closetag_shortcut = '>'
+let g:closetag_close_shortcut = '<leader>>'
 
 " DetectIndent
 augroup DetectIndent
@@ -327,22 +326,23 @@ augroup END
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.ts,*.jsx,*.tsx,*.json,*.css,*.scss,*.less,*.graphql,*.html PrettierAsync
 
-" ctrlp ignore files in .gitignore
+" ctrlpvim/ctrlp.vim
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-
-" close all popups on esc
-nnoremap <silent> <esc> :call popup_clear(1)<cr><esc>
 
 " ===========================================================================
 " Conquer of Completion
 " ===========================================================================
 set updatetime=300
+set hidden
 let g:coc_global_extensions = [
       \   'coc-tsserver',
       \   'coc-snippets',
       \   'coc-go',
       \   'coc-python'
       \ ]
+
+" close all popups on esc
+nnoremap <silent> <esc> :call coc#float#close_all()<cr><esc>
 
 " Always show the line number gutter
 set signcolumn=yes
@@ -370,22 +370,21 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" Tooltip on hover
-function! ShowDocIfNoDiagnostic(timer_id)
-  if (coc#float#has_float() == 0)
-    silent call CocActionAsync('doHover')
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endfunction
 
-function! s:show_hover_doc()
-  let floatblacklist = ['vim', 'help']
-  if (index(floatblacklist, &ft) < 0 || !coc#rpc#ready())
-    silent! call timer_start(100, 'ShowDocIfNoDiagnostic')
-  endif
-endfunction
-
-autocmd CursorHoldI * :call <SID>show_hover_doc()
-autocmd CursorHold * :call <SID>show_hover_doc()
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Rename
 nmap <F2> <Plug>(coc-rename)
