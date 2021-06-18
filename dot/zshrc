@@ -16,6 +16,10 @@ source $ZSH/oh-my-zsh.sh
 # aliases
 alias clip="xclip -selection clipboard"
 alias gpoh="git push -u origin HEAD"
+alias t="tmux"
+
+# transfer.sh
+transfer(){ if [ $# -eq 0 ];then echo "No arguments specified.\nUsage:\n transfer <file|directory>\n ... | transfer <file_name>">&2;return 1;fi;if tty -s;then file="$1";file_name=$(basename "$file");if [ ! -e "$file" ];then echo "$file: No such file or directory">&2;return 1;fi;if [ -d "$file" ];then file_name="$file_name.zip" ,;(cd "$file"&&zip -r -q - .)|curl --progress-bar --upload-file "-" "http://transfer.sh/$file_name"|tee /dev/null,;else cat "$file"|curl --progress-bar --upload-file "-" "http://transfer.sh/$file_name"|tee /dev/null;fi;else file_name=$1;curl --progress-bar --upload-file "-" "http://transfer.sh/$file_name"|tee /dev/null;fi;}
 
 # NVM lazy loading script
 # https://gist.github.com/rtfpessoa/811701ed8fa642f60e411aef04b2b64a
@@ -51,7 +55,8 @@ for cmd in "${NODE_GLOBALS[@]}"; do
   fi
 done
 
-# load nvm before launching vim
+# load nvm before launching nvim
 # needed for coc
-alias vi="load_nvm; vim"
-alias vim="load_nvm; vim"
+alias vi="nvim"
+alias vim="nvim"
+alias nvim="load_nvm; nvim"
