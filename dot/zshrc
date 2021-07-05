@@ -17,6 +17,8 @@ source $ZSH/oh-my-zsh.sh
 alias clip="xclip -selection clipboard"
 alias gpoh="git push -u origin HEAD"
 alias t="tmux"
+
+# fix kitty ssh
 alias ssh="TERM=xterm-256color ssh"
 
 # transfer.sh
@@ -62,4 +64,5 @@ alias vi="nvim"
 alias vim="nvim"
 alias nvim="load_nvm; nvim"
 
+# load .zprofile
 [[ -e ~/.zprofile ]] && . ~/.zprofile
