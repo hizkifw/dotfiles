@@ -1,5 +1,5 @@
 {
-  "snippets.userSnippetsDirectory": "~/.vim/snippets",
+  "snippets.userSnippetsDirectory": "~/.config/nvim/snippets",
   "suggest.autoTrigger": "trigger",
   "suggest.minTriggerInputLength": 0,
   "languageserver": {
