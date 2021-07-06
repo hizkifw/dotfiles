@@ -1,7 +1,14 @@
 snippet imr import React from 'react'
 	import React from 'react'
 
-snippet cmp React function component
+snippet cmp React function component without props
+	const ${0} = () => {
+		return null;
+	}
+
+	export default ${0};
+
+snippet cmpp React function component with props
 	export type ${0}Props = {};
 
 	const ${0} = (props: ${0}Props) => {
@@ -54,23 +61,17 @@ snippet nextdoc Next Custom Document
 snippet context React context
 	import React from 'react';
 
-	type ${1}ContextType = {
+	export type ${1}ContextType = {
 		//
 	}
 
-	const ${1}Context = React.createContext<${1}ContextType>({
+	export const ${1}Context = React.createContext<${1}ContextType>({
 		//
 	});
 
-	export default ${1}Context;
-
-snippet provider React context provider
-	import React from 'react';
-	import ${0}Context from './${0}Context';
-
-	const ${0}Provider = (props: any) => {
+	export const ${1}Provider = (props: any) => {
 		return (
-			<${0}Context.Provider
+			<${1}Context.Provider
 				value={{
 					//
 				}}
@@ -79,4 +80,30 @@ snippet provider React context provider
 		);
 	}
 
-	export default ${0}Provider;
+	export const use${1} = React.useContext(${1}Context);
+
+snippet uqw useQuery hook
+	export const useQuery${name:Name} = () =>
+		useQuery(['${name/(^[A-Z][a-z]*|[a-z])([A-Z])?/${1:/downcase}${2:+-}${2:/downcase}/g}'], () => ${fn:null})
+
+snippet uqwp useQuery hook with params
+	export type ${name:Name}Params = {
+		//
+	};
+	export const useQuery${name} = (params: ${name}Params) =>
+		useQuery(['${name/(^[A-Z][a-z]*|[a-z])([A-Z])?/${1:/downcase}${2:+-}${2:/downcase}/g}', params], () => ${fn:null})
+
+snippet umu useMutation hook
+	export const useMutate${name:Name} = () =>
+		useMutation(() => ${fn:null})
+
+snippet umup useMutation hook with params
+	export type ${name:Name}Params = {
+		//
+	};
+	export const useMutate${name} = () =>
+		useMutation((params: ${name}Params) => ${fn:null})
+
+snippet duqw Destructured useQuery hook usage
+	const { isLoading, isError, data, error } = useQuery${1}();
+
