@@ -17,6 +17,7 @@ source $ZSH/oh-my-zsh.sh
 alias clip="xclip -selection clipboard"
 alias gpoh="git push -u origin HEAD"
 alias t="tmux"
+alias k="kubectl"
 
 # fix kitty ssh
 alias ssh="TERM=xterm-256color ssh"
@@ -60,9 +61,13 @@ done
 
 # load nvm before launching nvim
 # needed for coc
+alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
 alias nvim="load_nvm; nvim"
+
+# direnv
+command -v direnv &>/dev/null && eval "$(direnv hook zsh)"
 
 # load .zprofile
 [[ -e ~/.zprofile ]] && . ~/.zprofile
