@@ -288,6 +288,8 @@ Plug 'peitalin/vim-jsx-typescript'
 
 " Other languages
 Plug 'TovarishFin/vim-solidity'
+Plug 'OmniSharp/omnisharp-vim'
+Plug 'rust-lang/rust.vim'
 call plug#end()
 
 " NERDTree
@@ -328,6 +330,7 @@ augroup END
 " Prettier every file save
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.ts,*.jsx,*.tsx,*.json,*.css,*.scss,*.less,*.graphql,*.html PrettierAsync
+autocmd BufWritePre *.rs RustFmt
 
 " ctrlpvim/ctrlp.vim
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
@@ -342,7 +345,10 @@ let g:coc_global_extensions = [
     \   'coc-snippets',
     \   'coc-go',
     \   'coc-python',
-    \   'coc-json'
+    \   'coc-json',
+    \   'coc-omnisharp',
+    \   'coc-rust-analyzer',
+    \   'coc-deno'
     \ ]
 
 " close all popups on esc
@@ -364,6 +370,12 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
+
+" popup scrolling
+nnoremap <nowait><expr> <C-J> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+nnoremap <nowait><expr> <C-K> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+inoremap <nowait><expr> <C-J> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+inoremap <nowait><expr> <C-K> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
 
 " manually trigger completion
 inoremap <silent><expr> <C-m> coc#refresh()
