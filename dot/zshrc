@@ -2,72 +2,36 @@ export ZSH="/home/hizkifw/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
 
 # Fuzzy completion
-CASE_SENSITIVE="false"
-HYPHEN_INSENSITIVE="true"
+CASE_SENSITIVE=false
+HYPHEN_INSENSITIVE=true
 
-# Automatically update without prompting.
-DISABLE_UPDATE_PROMPT="true"
+# Automatically update without prompting
+DISABLE_UPDATE_PROMPT=true
 
-# Enable git plugin
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-# aliases
-alias clip="xclip -selection clipboard"
-alias gpoh="git push -u origin HEAD"
+# Aliases
 alias t="tmux"
 alias k="kubectl"
+alias gpoh="git push -u origin HEAD"
+alias clip="xclip -selection clipboard"
 
 # fix kitty ssh
 alias ssh="TERM=xterm-256color ssh"
 
-# transfer.sh
-transfer(){ if [ $# -eq 0 ];then echo "No arguments specified.\nUsage:\n transfer <file|directory>\n ... | transfer <file_name>">&2;return 1;fi;if tty -s;then file="$1";file_name=$(basename "$file");if [ ! -e "$file" ];then echo "$file: No such file or directory">&2;return 1;fi;if [ -d "$file" ];then file_name="$file_name.zip" ,;(cd "$file"&&zip -r -q - .)|curl --progress-bar --upload-file "-" "http://transfer.sh/$file_name"|tee /dev/null,;else cat "$file"|curl --progress-bar --upload-file "-" "http://transfer.sh/$file_name"|tee /dev/null;fi;else file_name=$1;curl --progress-bar --upload-file "-" "http://transfer.sh/$file_name"|tee /dev/null;fi;}
-
-# NVM lazy loading script
-# https://gist.github.com/rtfpessoa/811701ed8fa642f60e411aef04b2b64a
-NVM_DIR="$HOME/.nvm"
-
-# Skip adding binaries if there is no node version installed yet
-if [ -d $NVM_DIR/versions/node ]; then
-  NODE_GLOBALS=(`find $NVM_DIR/versions/node -maxdepth 3 \( -type l -o -type f \) -wholename '*/bin/*' | xargs -n1 basename | sort | uniq`)
-fi
-NODE_GLOBALS+=("nvm")
-
-load_nvm () {
-  # Skip loading if already loaded
-  [[ $NVM_LOADED == 1 ]] && return 0
-
-  # Unset placeholder functions
-  for cmd in "${NODE_GLOBALS[@]}"; do unset -f ${cmd} &>/dev/null; done
-
-  # Load NVM
-  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-
-  # (Optional) Set the version of node to use from ~/.nvmrc if available
-  nvm use 2> /dev/null 1>&2 || true
-
-  # Do not reload nvm again
-  export NVM_LOADED=1
-}
-
-for cmd in "${NODE_GLOBALS[@]}"; do
-  # Skip defining the function if the binary is already in the PATH
-  if ! which ${cmd} &>/dev/null; then
-    eval "${cmd}() { unset -f ${cmd} &>/dev/null; [ -z \${NVM_LOADED+x} ] && load_nvm; ${cmd} \$@; }"
-  fi
-done
-
-# load nvm before launching nvim
-# needed for coc
+# vim
 alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
-alias nvim="load_nvm; nvim"
 
-# direnv
-command -v direnv &>/dev/null && eval "$(direnv hook zsh)"
+# global config
+export EDITOR="nvim"
+export BROWSER="firefox"
+export TERMINAL="kitty"
 
-# load .zprofile
-[[ -e ~/.zprofile ]] && . ~/.zprofile
+# ssh gpg agent
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpgconf --launch gpg-agent
+gpg-connect-agent updatestartuptty /bye >/dev/null
