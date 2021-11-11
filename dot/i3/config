@@ -69,6 +69,10 @@ bindsym $mod+Shift+space floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
+# disable borders
+default_border pixel 1
+default_floating_border pixel 1
+
 # define workspaces
 set $ws1 "1"
 set $ws2 "2"
