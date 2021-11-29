@@ -39,7 +39,7 @@ set noswapfile
 " No line wrapping
 set nowrap
 " Except for certain files
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+autocmd BufNewFile,BufReadPost *.md,*.mdx set filetype=markdown
 autocmd BufNewFile,BufReadPost *.txt set filetype=plaintext
 augroup WrapLine
     autocmd!
@@ -329,7 +329,7 @@ augroup END
 
 " Prettier every file save
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.ts,*.jsx,*.tsx,*.json,*.css,*.scss,*.less,*.graphql,*.html PrettierAsync
+autocmd BufWritePre *.js,*.ts,*.jsx,*.tsx,*.json,*.css,*.scss,*.less,*.graphql,*.html,*.md,*.mdx PrettierAsync
 autocmd BufWritePre *.rs RustFmt
 
 " ctrlpvim/ctrlp.vim
