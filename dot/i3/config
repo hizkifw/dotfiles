@@ -3,25 +3,8 @@
 set $mod Mod1
 font pango:Fira Code 8
 
-# load wallpaper
-exec nitrogen --restore
-# swap caps and escape
-exec setxkbmap -option caps:escape
-# keyboard repeat rate
-exec xset r rate 200 25
-# touchpad settings
-exec xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled" 1
-exec xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1
-
-# The combination of xss-lock, nm-applet and pactl is a popular choice, so
-# they are included here as an example. Modify as you see fit.
-
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-
-# NetworkManager tray icon
-exec --no-startup-id nm-applet
+# Settings and applets
+exec --no-startup-id ~/.config/i3/setup.sh
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -114,7 +97,10 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace
 bindsym $mod+Shift+r restart
 # exit i3
-bindsym $mod+Shift+BackSpace exec i3-msg exit
+bindsym $mod+Shift+BackSpace exec i3-msg exit && sleep 1 && killall Xorg
+# power off displays
+bindsym $mod+Shift+d exec --no-startup-id sleep 1 && xset dpms force off
+bindsym $mod+Shift+e exec --no-startup-id loginctl lock-session
 
 # resize window
 mode "resize" {

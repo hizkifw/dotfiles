@@ -1,9 +1,23 @@
 #!/bin/sh
 
-# remap escape and caps
-setxkbmap -option caps:escape
-# keyboard repeat rate
-xset r rate 200 25
-# touchpad natural scrolling
-xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled" 1
-xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1
+# monitor configuration
+layout() {
+  xrandr \
+    --output eDP1 \
+      --mode 1920x1080 \
+      --pos 0x0 \
+      --rotate normal \
+    --output DP1 \
+      --primary \
+      --mode 1920x1080 \
+      --pos 1920x0 \
+      --rotate normal \
+      --set "Broadcast RGB" "Full" \
+    --output VIRTUAL1 \
+      --off
+}
+
+until layout; do :; done
+
+# Start i3
+i3

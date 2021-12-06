@@ -25,3 +25,5 @@ makelink xinitrc .xinitrc
 makelink nvim .config/nvim
 makelink kitty .config/kitty
 makelink i3 .config/i3
+makelink i3status .config/i3status
+makelink dunst .config/dunst
