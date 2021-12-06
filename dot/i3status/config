@@ -9,12 +9,20 @@
 general {
     colors = true
     interval = 1
+    output_format = i3bar
 }
 
+order += "read_file updates"
 order += "load"
 order += "memory"
 order += "volume master"
 order += "tztime local"
+
+read_file updates {
+    format = "%content update(s) available"
+    format_bad = ""
+    path = "~/.cache/checkupdates"
+}
 
 volume master {
     format = "VOL %volume"

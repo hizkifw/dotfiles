@@ -8,22 +8,35 @@ makelink() {
   target="$cwd/dot/$1"
   linkname="$HOME/$2"
 
+  # Check if target exists
   if [[ -e "$linkname" ]]; then
+    # Check if already linked
+    if [[ "$(readlink -f "$target")" == "$(readlink -f "$linkname")" ]]; then
+      return 0
+    fi
+
     newname="$linkname-$(date +%s)"
     mv "$linkname" "$newname"
     echo "Warn: target exists, renamed to $newname"
   fi
 
   mkdir -p `dirname "$linkname"`
-  ln -s "$target" "$linkname"
+  ln -sv "$target" "$linkname"
 }
 
 makelink tmux.conf .tmux.conf
-makelink zshrc .zshrc
+makelink zshrc     .zshrc
 makelink gitconfig .gitconfig
-makelink xinitrc .xinitrc
-makelink nvim .config/nvim
-makelink kitty .config/kitty
-makelink i3 .config/i3
-makelink i3status .config/i3status
-makelink dunst .config/dunst
+makelink xinitrc   .xinitrc
+makelink nvim      .config/nvim
+makelink kitty     .config/kitty
+makelink dunst     .config/dunst
+makelink i3        .config/i3
+makelink i3status  .config/i3status
+
+makelink i3status/checkupdates.service .config/systemd/user/checkupdates.service
+makelink i3status/checkupdates.timer   .config/systemd/user/checkupdates.timer
+systemctl --user enable checkupdates.timer
+systemctl --user start  checkupdates.timer
+
+echo 'Done'
