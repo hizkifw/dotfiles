@@ -1,0 +1,13 @@
+set smtp_url = "smtp://work@smtp.gmail.com:587"
+set smtp_pass = "`pass show fastmail-mail`"
+
+set folder = "~/.mail/fastmail"
+set spoolfile = "~/.mail/fastmail/Inbox"
+set postponed = "~/.mail/fastmail/Drafts"
+set trash = "+/Trash"
+set record = ""
+
+set from = "felix@hizkifw.me"
+set realname = "Hizkia Felix"
+
+# vi: ft=neomuttrc

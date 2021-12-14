@@ -20,23 +20,32 @@ makelink() {
     echo "Warn: target exists, renamed to $newname"
   fi
 
-  mkdir -p `dirname "$linkname"`
+  mkdir -p "$(dirname "$linkname")"
   ln -sv "$target" "$linkname"
 }
 
+# General
 makelink tmux.conf .tmux.conf
 makelink zshrc     .zshrc
 makelink gitconfig .gitconfig
-makelink xinitrc   .xinitrc
 makelink nvim      .config/nvim
 makelink kitty     .config/kitty
+
+# Desktop
+makelink xinitrc   .xinitrc
 makelink dunst     .config/dunst
 makelink i3        .config/i3
 makelink i3status  .config/i3status
+makelink picom     .config/picom
 
 makelink i3status/checkupdates.service .config/systemd/user/checkupdates.service
 makelink i3status/checkupdates.timer   .config/systemd/user/checkupdates.timer
 systemctl --user enable checkupdates.timer
-systemctl --user start  checkupdates.timer
+
+# Mail
+makelink neomutt               .config/neomutt
+makelink mbsync/mbsync.service .config/systemd/user/mbsync.service
+makelink mbsync/mbsync.timer   .config/systemd/user/mbsync.timer
+systemctl --user enable mbsync.timer
 
 echo 'Done'

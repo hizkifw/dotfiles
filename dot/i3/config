@@ -29,6 +29,9 @@ bindsym $mod+d exec "rofi -modi drun,run -show drun"
 bindsym Print exec --no-startup-id flameshot screen -c
 bindsym Ctrl+Print exec --no-startup-id flameshot gui
 
+# focus window for e.g. notification actions
+focus_on_window_activation focus
+
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -58,6 +61,9 @@ bindsym $mod+space focus mode_toggle
 
 # disable borders
 for_window [class=".*"] border pixel 0
+
+# fix qemu
+for_window [class="qemu-system-*"] fullscreen enable
 
 # i3-gaps
 smart_gaps on

@@ -5,6 +5,3 @@ Wants=checkupdates.timer
 [Service]
 Type=oneshot
 ExecStart=%h/.config/i3status/checkupdates.sh
-
-[Install]
-WantedBy=default.target

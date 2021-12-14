@@ -1,7 +1,13 @@
 {
   "snippets.userSnippetsDirectory": "~/.config/nvim/snippets",
-  "suggest.autoTrigger": "trigger",
+  "suggest.autoTrigger": "always",
   "suggest.minTriggerInputLength": 0,
+
+  "rust-analyzer.updates.prompt": true,
+  "rust-analyzer.updates.channel": "nightly",
+  "rust-analyzer.procMacro.enable": true,
+  "rust-analyzer.diagnostics.disabled": ["unresolved-proc-macro"],
+
   "languageserver": {
     "ccls": {
       "command": "ccls",

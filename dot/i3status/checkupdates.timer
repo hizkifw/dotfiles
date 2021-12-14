@@ -8,4 +8,4 @@ OnStartupSec=60
 OnUnitActiveSec=3600
 
 [Install]
-WantedBy=default.target
+WantedBy=timers.target
