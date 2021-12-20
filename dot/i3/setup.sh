@@ -13,6 +13,8 @@ nitrogen --restore
 # Compositor
 picom --daemon
 
+# Bottom bar
+polybar bottom --reload &
 # NetworkManager tray icon
 nm-applet &
 # Notifications

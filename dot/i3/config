@@ -7,7 +7,7 @@ font pango:Fira Code 8
 exec --no-startup-id ~/.config/i3/setup.sh
 
 # Use pactl to adjust volume in PulseAudio.
-set $reload_volume killall -SIGUSR1 i3status && ~/.config/i3/dunst-vol.sh
+set $reload_volume ~/.config/i3/dunst-vol.sh
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $reload_volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $reload_volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $reload_volume
@@ -114,7 +114,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+BackSpace exec i3-msg exit && sleep 1 && killall Xorg
 # power off displays
 bindsym $mod+Shift+d exec --no-startup-id sleep 1 && xset dpms force off
-bindsym $mod+Shift+e exec --no-startup-id loginctl lock-session
+bindsym $mod+Shift+e exec --no-startup-id "loginctl lock-session; sleep 5 && xset dpms force off"
 
 # resize window
 mode "resize" {
@@ -132,7 +132,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Start i3bar
-bar {
-  status_command i3status
-  strip_workspace_numbers yes
-}
+# bar {
+#   status_command i3status
+#   strip_workspace_numbers yes
+# }

@@ -36,6 +36,8 @@ makelink xinitrc   .xinitrc
 makelink dunst     .config/dunst
 makelink i3        .config/i3
 makelink i3status  .config/i3status
+makelink polybar   .config/polybar
+makelink rofi      .config/rofi
 makelink picom     .config/picom
 
 makelink i3status/checkupdates.service .config/systemd/user/checkupdates.service
