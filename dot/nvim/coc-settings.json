@@ -1,4 +1,6 @@
 {
+  "tsserver.trace.server": "verbose",
+  "tsserver.log": "verbose",
   "snippets.userSnippetsDirectory": "~/.config/nvim/snippets",
   "suggest.autoTrigger": "always",
   "suggest.minTriggerInputLength": 0,

@@ -25,6 +25,9 @@ bindsym $mod+Shift+q kill
 # start rofi
 bindsym $mod+d exec "rofi -modi drun,run -show drun"
 
+# rofi calculator
+bindsym $mod+c exec "rofi -show calc -modi calc -no-show-match -no-sort"
+
 # screenshots
 bindsym Print exec --no-startup-id flameshot screen -c
 bindsym Ctrl+Print exec --no-startup-id flameshot gui
@@ -64,22 +67,25 @@ for_window [class=".*"] border pixel 0
 
 # fix qemu
 for_window [class="qemu-system-*"] fullscreen enable
+# set zoom to float by default
+for_window [class="zoom"] floating enable
+for_window [class="plover"] floating enable
 
 # i3-gaps
 smart_gaps on
 gaps inner 20
 gaps outer 5
 
-# workspace names uses glyphs from nerd-fonts
-set $ws1 "1:"
-set $ws2 "2:"
+# workspaces
+set $ws1 "1"
+set $ws2 "2"
 set $ws3 "3"
 set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
-set $ws9 "9:"
+set $ws9 "9"
 set $ws10 "10"
 
 # switch to workspace

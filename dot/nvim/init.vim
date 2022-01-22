@@ -73,7 +73,7 @@ set ffs=unix,dos,mac
 " Display
 " ===========================================================================
 
-colorscheme afterglow
+autocmd vimenter * ++nested colorscheme afterglow
 if $COLORTERM == 'gnome-terminal' || $VIM_COLORFUL == 1
     set t_Co=256
     " Fix weird colors on scroll
@@ -178,7 +178,7 @@ endfunction
 nmap <silent> <leader>n :call ToggleNERDTree()<cr>
 
 " Toggle Goyo
-nmap <leader>go :Goyo<cr>
+nmap <leader>go :Goyo 82<cr>
 " Creating tabs and windows
 nmap <leader>t :tabnew<cr>
 nmap <leader>v :vnew<cr>
@@ -265,6 +265,9 @@ runtime! ftplugin/man.vim
 set rtp+=$HOME/.local/lib/python3.5/site-packages/powerline/bindings/vim/
 call plug#begin(vimhome . '/plugvim')
 
+" Color scheme
+Plug 'morhetz/gruvbox'
+
 " Utilities
 Plug 'tpope/vim-surround'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -275,10 +278,12 @@ Plug 'junegunn/goyo.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'tcbbd/detectindent'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'psf/black', { 'branch': 'stable' }
 Plug 'airblade/vim-gitgutter'
 
 " Code completion
 Plug 'neoclide/coc.nvim'
+Plug 'github/copilot.vim'
 
 " Typescript support
 Plug 'herringtondarkholme/yats.vim'
@@ -331,6 +336,7 @@ augroup END
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.ts,*.jsx,*.tsx,*.json,*.css,*.scss,*.less,*.graphql,*.html,*.md,*.mdx PrettierAsync
 autocmd BufWritePre *.rs RustFmt
+autocmd BufWritePre *.py Black
 
 " ctrlpvim/ctrlp.vim
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
@@ -348,7 +354,8 @@ let g:coc_global_extensions = [
     \   'coc-json',
     \   'coc-omnisharp',
     \   'coc-rust-analyzer',
-    \   'coc-deno'
+    \   'coc-deno',
+    \   'coc-r-lsp',
     \ ]
 
 " close all popups on esc

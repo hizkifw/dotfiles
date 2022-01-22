@@ -15,11 +15,19 @@ source $ZSH/oh-my-zsh.sh
 typeset -U path # make path unique
 path[1,0]=~/.local/bin
 
+# Add ~/.local/app/*/bin to path
+for app in ~/.local/app/*; do
+    if [ -d "$app/bin" ]; then
+        path+=("$app/bin")
+    fi
+done
+
 # Aliases
 alias t="tmux"
 alias k="kubectl"
 alias gpoh="git push -u origin HEAD"
 alias clip="xclip -selection clipboard"
+alias hl="highlight -O ansi -l"
 
 # fix kitty ssh
 alias ssh="TERM=xterm-256color ssh"
@@ -41,3 +49,20 @@ gpg-connect-agent updatestartuptty /bye >/dev/null
 
 # direnv hook
 command -v direnv &>/dev/null && eval "$(direnv hook zsh)"
+
+# pyenv
+command -v pyenv &>/dev/null && \
+  eval "$(pyenv init --path)" && \
+  eval "$(pyenv init -)" && \
+  pyenv virtualenv --help &>/dev/null &&\
+    eval "$(pyenv virtualenv-init -)"
+
+# Enable nvm on-demand
+nvm() {
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+}
+
+# gcloud autocompletion
+[[ -f /opt/google-cloud-sdk/completion.zsh.inc ]] && source /opt/google-cloud-sdk/completion.zsh.inc
