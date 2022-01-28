@@ -50,4 +50,7 @@ makelink mbsync/mbsync.service .config/systemd/user/mbsync.service
 makelink mbsync/mbsync.timer   .config/systemd/user/mbsync.timer
 systemctl --user enable mbsync.timer
 
+# Other apps
+makelink plover .config/plover
+
 echo 'Done'

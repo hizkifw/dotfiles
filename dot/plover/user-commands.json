@@ -1,0 +1,13 @@
+{
+"TK*FPS": "{*!}",
+"TPEFBG": "{#escape}{MODE:RESET}",
+"PH*D": "{#}",
+"PH*D/KAP": "{MODE:CAPS}",
+"PH*D/KAPL": "{MODE:CAMEL}",
+"PH*D/PH*D": "{MODE:RESET}",
+"PH*D/HRO": "{MODE:LOWER}",
+"HRO*ERD": "{:retro_case:lower_first_char}",
+"R-R": "{^~|\n^}{MODE:RESET}",
+"*UPD": "{:retro_case:cap_first_word}",
+"*UPD/*UPD": "{:retro_case:upper_first_word}"
+}
