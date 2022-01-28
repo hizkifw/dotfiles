@@ -6,9 +6,6 @@
 " General
 " ===========================================================================
 
-" Set backspace type (for gVim on Windows)
-set bs=2
-
 " Set .vim directory
 let vimhome = $HOME . '/.config/nvim'
 if !isdirectory(vimhome . '/temp')
@@ -73,7 +70,7 @@ set ffs=unix,dos,mac
 " Display
 " ===========================================================================
 
-autocmd vimenter * ++nested colorscheme afterglow
+colorscheme afterglow
 if $COLORTERM == 'gnome-terminal' || $VIM_COLORFUL == 1
     set t_Co=256
     " Fix weird colors on scroll
@@ -161,11 +158,14 @@ let g:mapleader = " "
 " Add lines surrounding
 nmap <leader>o O<esc>jo<esc>ki
 " Quicksave
-nmap <leader>w :w<cr>
-nmap <leader>W :w!<cr>
+nmap              <leader>w   :w<cr>
+nmap              <leader>W   :w!<cr>
+noremap  <silent> <C-S>       :update<CR>
+vnoremap <silent> <C-S>  <C-C>:update<CR>
+inoremap <silent> <C-S>  <C-O>:update<CR>
+
 " Quickclose
 nmap <leader>cl :clo<cr>
-nmap <leader>qq :qa<cr>
 
 " Toggle NerdTree
 function! ToggleNERDTree()
@@ -178,7 +178,7 @@ endfunction
 nmap <silent> <leader>n :call ToggleNERDTree()<cr>
 
 " Toggle Goyo
-nmap <leader>go :Goyo 82<cr>
+nmap <leader>go :Goyo<cr>
 " Creating tabs and windows
 nmap <leader>t :tabnew<cr>
 nmap <leader>v :vnew<cr>
@@ -214,7 +214,8 @@ map Y y$
 map <F1> <Esc>
 imap <F1> <Esc>
 " Put current buffer to clipboard
-nmap <leader>y :! cat % \| xclip -selection clipboard<cr><cr>
+nmap <leader>y :w !xclip -selection clipboard<cr><cr>
+vmap <leader>y :'<,'>w !xclip -selection clipboard<cr><cr>
 
 " Return to last edit position when opening files
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -265,9 +266,6 @@ runtime! ftplugin/man.vim
 set rtp+=$HOME/.local/lib/python3.5/site-packages/powerline/bindings/vim/
 call plug#begin(vimhome . '/plugvim')
 
-" Color scheme
-Plug 'morhetz/gruvbox'
-
 " Utilities
 Plug 'tpope/vim-surround'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -282,7 +280,7 @@ Plug 'psf/black', { 'branch': 'stable' }
 Plug 'airblade/vim-gitgutter'
 
 " Code completion
-Plug 'neoclide/coc.nvim'
+Plug 'neoclide/coc.nvim', { 'do': 'yarn install' }
 Plug 'github/copilot.vim'
 
 " Typescript support
@@ -292,6 +290,7 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'peitalin/vim-jsx-typescript'
 
 " Other languages
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'TovarishFin/vim-solidity'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'rust-lang/rust.vim'
@@ -379,10 +378,10 @@ endfunction
 let g:coc_snippet_next = '<tab>'
 
 " popup scrolling
-nnoremap <nowait><expr> <C-J> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-nnoremap <nowait><expr> <C-K> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-inoremap <nowait><expr> <C-J> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-inoremap <nowait><expr> <C-K> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+nnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+inoremap <nowait><expr> <Right> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+inoremap <nowait><expr> <Left> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
 
 " manually trigger completion
 inoremap <silent><expr> <C-m> coc#refresh()
@@ -419,29 +418,9 @@ nmap <leader>do <Plug>(coc-codeaction)
 " idk why
 inoremap <silent> <cr> <cr>
 
-" Opening vim somehow starts it in replace mode
-" https://stackoverflow.com/a/51388837
-nnoremap <esc>^[ <esc>^[
-
 " ===========================================================================
 " Commands
 " ===========================================================================
 
 " sudo save
 command! W exec 'w !sudo dd of=' . shellescape(expand('%'))
-
-fun! ReadMode()
-    :Goyo 120
-    set lbr
-    set wrap
-endfunction
-
-fun! NoReadMode()
-    :Goyo
-    set nolbr
-    set nowrap
-endfunction
-
-" Reading mode
-command Read call ReadMode()
-command NoRead call NoReadMode()
