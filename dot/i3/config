@@ -56,6 +56,10 @@ bindsym $mod+e split v
 # enter fullscreen mode for the focused container
 bindsym $mod+F11 fullscreen toggle
 
+# change container layout
+bindsym Mod1+w layout tabbed
+bindsym Mod1+s layout toggle split
+
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
@@ -63,18 +67,20 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # disable borders
-for_window [class=".*"] border pixel 0
+for_window [class=".*"] border pixel 1
+hide_edge_borders both
 
 # fix qemu
 for_window [class="qemu-system-*"] fullscreen enable
 # set zoom to float by default
 for_window [class="zoom"] floating enable
 for_window [class="plover"] floating enable
+for_window [class="feh"] floating enable
 
 # i3-gaps
-smart_gaps on
-gaps inner 20
-gaps outer 5
+# smart_gaps on
+# gaps inner 20
+# gaps outer 5
 
 # workspaces
 set $ws1 "1"

@@ -22,6 +22,9 @@ for app in ~/.local/app/*; do
     fi
 done
 
+path+=("$HOME/.cargo/bin")
+path+=("$HOME/go/bin")
+
 # Aliases
 alias t="tmux"
 alias k="kubectl"
