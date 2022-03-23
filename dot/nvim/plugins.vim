@@ -97,7 +97,6 @@ set hidden
 let g:coc_global_extensions = [
     \   'coc-tsserver',
     \   'coc-snippets',
-    \   'coc-go',
     \   'coc-python',
     \   'coc-json',
     \   'coc-omnisharp',

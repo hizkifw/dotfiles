@@ -25,6 +25,11 @@
       "host": "127.0.0.1",
       "filetypes": ["gdscript"],
       "port": 6008
+    },
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"]
     }
   }
 }
