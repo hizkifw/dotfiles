@@ -42,7 +42,7 @@ alias vim="nvim"
 
 # global config
 export EDITOR="nvim"
-export BROWSER="firefox"
+export BROWSER="chromium"
 export TERMINAL="kitty"
 
 # ssh gpg agent

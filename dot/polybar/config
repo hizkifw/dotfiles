@@ -151,7 +151,8 @@ label-urgent-padding = 2
 [module/mpd]
 type = internal/mpd
 host = /home/kitsune/.mpd/socket
-format-online = %{A1:ymuse:}<label-song>%{A} | <icon-prev> <icon-stop> <toggle> <icon-next>
+; format-online = %{A1:ymuse:}<label-song>%{A} | <icon-prev> <icon-stop> <toggle> <icon-next>
+format-online = %{A1:ymuse:}<label-song>%{A} | <toggle> <icon-next>
 
 ; NerdFonts icons
 icon-prev = 玲
@@ -207,7 +208,7 @@ label-muted-foreground = ${colors.primary}
 [module/temperature]
 type = internal/temperature
 thermal-zone = 9
-warn-temperature = 60
+warn-temperature = 80
 
 format-prefix = "TEMP "
 format-prefix-foreground = ${colors.foreground-alt}
