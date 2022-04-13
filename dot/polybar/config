@@ -56,7 +56,7 @@ font-5 = "Noto Sans Mono CJK HK:style=Regular,Regular:size=8;2"
 
 modules-left = i3 xwindow
 modules-center = mpd
-modules-right = checkupdates pulseaudio memory temperature date
+modules-right = checkupdates pulseaudio memory temperature battery date
 
 tray-position = right
 tray-padding = 3
@@ -179,6 +179,19 @@ format-prefix = "MEM "
 format-prefix-foreground = ${colors.foreground-alt}
 ;format-underline = ${colors.foreground-alt}
 label = %gb_used%
+
+[module/battery]
+type = internal/battery
+format-charging-prefix = "CHR "
+format-charging-prefix-foreground = ${colors.foreground-alt}
+format-discharging-prefix = "BAT "
+format-discharging-prefix-foreground = ${colors.foreground-alt}
+full-at = 100
+low-at = 10
+; $ ls -1 /sys/class/power_supply/
+battery = BAT0
+adapter = AC
+poll-interval = 5
 
 [module/date]
 type = internal/date

@@ -45,10 +45,10 @@ makelink i3status/checkupdates.timer   .config/systemd/user/checkupdates.timer
 systemctl --user enable checkupdates.timer
 
 # Mail
-makelink neomutt               .config/neomutt
-makelink mbsync/mbsync.service .config/systemd/user/mbsync.service
-makelink mbsync/mbsync.timer   .config/systemd/user/mbsync.timer
-systemctl --user enable mbsync.timer
+# makelink neomutt               .config/neomutt
+# makelink mbsync/mbsync.service .config/systemd/user/mbsync.service
+# makelink mbsync/mbsync.timer   .config/systemd/user/mbsync.timer
+# systemctl --user enable mbsync.timer
 
 # Other apps
 makelink plover .config/plover
