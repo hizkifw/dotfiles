@@ -69,3 +69,14 @@ nvm() {
 
 # gcloud autocompletion
 [[ -f /opt/google-cloud-sdk/completion.zsh.inc ]] && source /opt/google-cloud-sdk/completion.zsh.inc
+
+# shrink pdf
+shrinkpdf() {
+  infile="$1"
+  outfile="$2"
+  if [ -z "$outfile" ]; then
+    echo "Usage: shrinkpdf <infile> <outfile>"
+    return 1
+  fi
+  gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/printer -sOutputFile="$outfile" "$infile"
+}
