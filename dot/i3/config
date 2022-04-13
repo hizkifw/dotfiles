@@ -4,14 +4,14 @@ set $mod Mod1
 font pango:Fira Code 8
 
 # load wallpaper
-exec nitrogen --restore
+exec --no-startup-id nitrogen --restore
 # swap caps and escape
-exec setxkbmap -option caps:escape
+exec --no-startup-id setxkbmap -option caps:escape
 # keyboard repeat rate
-exec xset r rate 200 25
+exec --no-startup-id xset r rate 200 25
 # touchpad settings
-exec xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled" 1
-exec xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1
+exec --no-startup-id xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled" 1
+exec --no-startup-id xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.

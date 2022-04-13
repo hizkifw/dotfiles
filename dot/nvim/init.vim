@@ -6,9 +6,6 @@
 " General
 " ===========================================================================
 
-" Set backspace type (for gVim on Windows)
-set bs=2
-
 " Set .vim directory
 let vimhome = $HOME . '/.config/nvim'
 if !isdirectory(vimhome . '/temp')
@@ -161,11 +158,14 @@ let g:mapleader = " "
 " Add lines surrounding
 nmap <leader>o O<esc>jo<esc>ki
 " Quicksave
-nmap <leader>w :w<cr>
-nmap <leader>W :w!<cr>
+nmap              <leader>w   :w<cr>
+nmap              <leader>W   :w!<cr>
+noremap  <silent> <C-S>       :update<CR>
+vnoremap <silent> <C-S>  <C-C>:update<CR>
+inoremap <silent> <C-S>  <C-O>:update<CR>
+
 " Quickclose
 nmap <leader>cl :clo<cr>
-nmap <leader>qq :qa<cr>
 
 " Toggle NerdTree
 function! ToggleNERDTree()
@@ -214,7 +214,8 @@ map Y y$
 map <F1> <Esc>
 imap <F1> <Esc>
 " Put current buffer to clipboard
-nmap <leader>y :! cat % \| xclip -selection clipboard<cr><cr>
+nmap <leader>y :w !xclip -selection clipboard<cr><cr>
+vmap <leader>y :'<,'>w !xclip -selection clipboard<cr><cr>
 
 " Return to last edit position when opening files
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -275,10 +276,12 @@ Plug 'junegunn/goyo.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'tcbbd/detectindent'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'psf/black', { 'branch': 'stable' }
 Plug 'airblade/vim-gitgutter'
 
 " Code completion
-Plug 'neoclide/coc.nvim'
+Plug 'neoclide/coc.nvim', { 'do': 'yarn install' }
+Plug 'github/copilot.vim'
 
 " Typescript support
 Plug 'herringtondarkholme/yats.vim'
@@ -287,6 +290,7 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'peitalin/vim-jsx-typescript'
 
 " Other languages
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'TovarishFin/vim-solidity'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'rust-lang/rust.vim'
@@ -331,6 +335,7 @@ augroup END
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.ts,*.jsx,*.tsx,*.json,*.css,*.scss,*.less,*.graphql,*.html,*.md,*.mdx PrettierAsync
 autocmd BufWritePre *.rs RustFmt
+autocmd BufWritePre *.py Black
 
 " ctrlpvim/ctrlp.vim
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
@@ -348,7 +353,8 @@ let g:coc_global_extensions = [
     \   'coc-json',
     \   'coc-omnisharp',
     \   'coc-rust-analyzer',
-    \   'coc-deno'
+    \   'coc-deno',
+    \   'coc-r-lsp',
     \ ]
 
 " close all popups on esc
@@ -372,10 +378,10 @@ endfunction
 let g:coc_snippet_next = '<tab>'
 
 " popup scrolling
-nnoremap <nowait><expr> <C-J> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-nnoremap <nowait><expr> <C-K> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-inoremap <nowait><expr> <C-J> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-inoremap <nowait><expr> <C-K> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+nnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+inoremap <nowait><expr> <Right> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+inoremap <nowait><expr> <Left> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
 
 " manually trigger completion
 inoremap <silent><expr> <C-m> coc#refresh()
@@ -412,29 +418,9 @@ nmap <leader>do <Plug>(coc-codeaction)
 " idk why
 inoremap <silent> <cr> <cr>
 
-" Opening vim somehow starts it in replace mode
-" https://stackoverflow.com/a/51388837
-nnoremap <esc>^[ <esc>^[
-
 " ===========================================================================
 " Commands
 " ===========================================================================
 
 " sudo save
 command! W exec 'w !sudo dd of=' . shellescape(expand('%'))
-
-fun! ReadMode()
-    :Goyo 120
-    set lbr
-    set wrap
-endfunction
-
-fun! NoReadMode()
-    :Goyo
-    set nolbr
-    set nowrap
-endfunction
-
-" Reading mode
-command Read call ReadMode()
-command NoRead call NoReadMode()
