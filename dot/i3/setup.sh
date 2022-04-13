@@ -1,5 +1,7 @@
 #!/bin/bash
 
+hostname=$(hostnamectl hostname)
+
 # Bottom bar
 polybar bottom --reload &
 # ibus daemon for input methods
@@ -14,6 +16,12 @@ xset r rate 200 25
 nitrogen --restore
 # Compositor
 picom --daemon
+
+# Touchpad configuration
+if [[ "$hostname" == "udon" ]]; then
+  xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled" 1
+  xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1
+fi
 
 # NetworkManager tray icon
 nm-applet &
