@@ -1,0 +1,13 @@
+set smtp_authenticators = "login"
+set ssl_force_tls = yes
+
+folder-hook 'fastmail' 'source ~/.config/neomutt/profiles/fastmail'
+# folder-hook 'personal'
+macro index 1 "<change-folder> =../fastmail/inbox/<enter>"
+# macro index 2
+macro index G "!mbsync -a^M" "Update through mbsync"
+set move = no
+
+source ./bindings
+source ./profiles/fastmail
+# source ~/.config/neomutt/profiles/fastmail

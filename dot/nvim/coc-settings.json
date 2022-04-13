@@ -1,7 +1,15 @@
 {
+  "tsserver.trace.server": "verbose",
+  "tsserver.log": "verbose",
   "snippets.userSnippetsDirectory": "~/.config/nvim/snippets",
-  "suggest.autoTrigger": "trigger",
+  "suggest.autoTrigger": "always",
   "suggest.minTriggerInputLength": 0,
+
+  "rust-analyzer.updates.prompt": true,
+  "rust-analyzer.updates.channel": "nightly",
+  "rust-analyzer.procMacro.enable": false,
+  "rust-analyzer.diagnostics.disabled": ["unresolved-proc-macro"],
+
   "languageserver": {
     "ccls": {
       "command": "ccls",
@@ -12,6 +20,16 @@
           "directory": "/tmp/ccls"
         }
       }
+    },
+    "godot": {
+      "host": "127.0.0.1",
+      "filetypes": ["gdscript"],
+      "port": 6008
+    },
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"]
     }
   }
 }

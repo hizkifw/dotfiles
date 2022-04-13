@@ -1,0 +1,47 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+    colors = true
+    interval = 1
+}
+
+order += "read_file updates"
+order += "load"
+order += "memory"
+order += "volume master"
+order += "tztime local"
+
+read_file updates {
+    format = "%content"
+    format_bad = ""
+    color_good = "#ffffff"
+    path = "~/.cache/checkupdates"
+}
+
+volume master {
+    format = "vol %volume"
+    format_muted = "VOL muted (%volume)"
+    device = "default"
+    mixer = "Master"
+    mixer_idx = 0
+}
+
+load {
+    format = "cpu %1min"
+}
+
+memory {
+    format = "mem %used"
+    threshold_degraded = "1G"
+    format_degraded = "MEMORY < %available"
+}
+
+tztime local {
+    format = "%A %Y-%m-%d %H:%M:%S"
+}

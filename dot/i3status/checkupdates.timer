@@ -1,0 +1,11 @@
+[Unit]
+Description=Check for system updates
+Requires=checkupdates.service
+
+[Timer]
+Unit=checkupdates.service
+OnStartupSec=60
+OnUnitActiveSec=3600
+
+[Install]
+WantedBy=timers.target
