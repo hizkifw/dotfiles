@@ -15,15 +15,12 @@ source $ZSH/oh-my-zsh.sh
 typeset -U path # make path unique
 path[1,0]=~/.local/bin
 
-# Add ~/.local/app/*/bin to path
-for app in ~/.local/app/*; do
+# Add ~/.local/app/*/bin, ~/.cargo/bin, ~/go/bin to path
+for app in ~/.local/app/* ~/.cargo ~/go; do
     if [ -d "$app/bin" ]; then
         path+=("$app/bin")
     fi
 done
-
-path+=("$HOME/.cargo/bin")
-path+=("$HOME/go/bin")
 
 # Aliases
 alias t="tmux"
@@ -54,17 +51,23 @@ gpg-connect-agent updatestartuptty /bye >/dev/null
 command -v direnv &>/dev/null && eval "$(direnv hook zsh)"
 
 # pyenv
-command -v pyenv &>/dev/null && \
-  eval "$(pyenv init --path)" && \
-  eval "$(pyenv init -)" && \
-  pyenv virtualenv --help &>/dev/null &&\
-    eval "$(pyenv virtualenv-init -)"
+pyenv() {
+  command -v pyenv &>/dev/null && \
+    eval "$(command pyenv init --path)" && \
+    eval "$(command pyenv init -)" && \
+    command pyenv virtualenv --help &>/dev/null && \
+      eval "$(command pyenv virtualenv-init -)"
+
+  command pyenv "$@"
+}
 
 # Enable nvm on-demand
 nvm() {
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+  nvm "$@"
 }
 
 # gcloud autocompletion
