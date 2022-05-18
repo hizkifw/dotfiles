@@ -40,6 +40,8 @@ makelink polybar   .config/polybar
 makelink rofi      .config/rofi
 makelink picom     .config/picom
 
+makelink gtk-settings.ini .config/gtk-3.0/settings.ini
+
 makelink i3status/checkupdates.service .config/systemd/user/checkupdates.service
 makelink i3status/checkupdates.timer   .config/systemd/user/checkupdates.timer
 systemctl --user enable checkupdates.timer
