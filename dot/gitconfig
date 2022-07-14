@@ -14,3 +14,6 @@
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
+
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/

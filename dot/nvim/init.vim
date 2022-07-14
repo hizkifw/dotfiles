@@ -15,6 +15,9 @@ endif
 filetype plugin on
 filetype indent on
 
+" Enable mouse support
+set mouse=a
+
 " Auto read file when changed
 set autoread
 

@@ -80,7 +80,7 @@ snippet context React context
 		);
 	}
 
-	export const use${1} = React.useContext(${1}Context);
+	export const use${1} = () => React.useContext(${1}Context);
 
 snippet uqw useQuery hook
 	export const useQuery${name:Name} = () =>

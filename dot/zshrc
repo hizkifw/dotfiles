@@ -39,7 +39,7 @@ alias vim="nvim"
 
 # global config
 export EDITOR="nvim"
-export BROWSER="chromium"
+export BROWSER="firefox"
 export TERMINAL="kitty"
 
 # ssh gpg agent
@@ -62,11 +62,13 @@ pyenv() {
 }
 
 # Enable nvm on-demand
-nvm() {
+load_nvm() {
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
+}
+nvm() {
+  load_nvm
   nvm "$@"
 }
 
@@ -82,4 +84,10 @@ shrinkpdf() {
     return 1
   fi
   gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/printer -sOutputFile="$outfile" "$infile"
+}
+
+# downgrade arch kernel to currently running version
+# workaround to fix docker https://github.com/moby/moby/issues/27426#issuecomment-346270696
+kernel-downgrade-to-running-version() {
+  sudo pacman -U /var/cache/pacman/pkg/linux-$(uname -r | sed 's/-arch/.arch/')-x86_64.pkg.tar.zst
 }
