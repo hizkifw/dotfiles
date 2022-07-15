@@ -1,15 +1,17 @@
-export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="robbyrussell"
+# If not in tmux, start tmux.
+if [[ -z ${TMUX+X}${ZSH_SCRIPT+X}${ZSH_EXECUTION_STRING+X} ]]; then
+  exec tmux
+fi
 
-# Fuzzy completion
-CASE_SENSITIVE=false
-HYPHEN_INSENSITIVE=true
+# Load antigen
+source "$HOME/.config/antigen/antigen.zsh"
 
-# Automatically update without prompting
-DISABLE_UPDATE_PROMPT=true
-plugins=(git)
+# Configure plugins
+export NVM_LAZY_LOAD=true
+export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim' 'vim')
 
-source $ZSH/oh-my-zsh.sh
+# Load antigen configuration
+antigen init ~/.config/antigen/antigenrc
 
 # Add ~/.local/bin to path
 typeset -U path # make path unique
@@ -33,9 +35,7 @@ alias hl="highlight -O ansi -l"
 alias ssh="TERM=xterm-256color ssh"
 
 # vim
-alias v="nvim"
 alias vi="nvim"
-alias vim="nvim"
 
 # global config
 export EDITOR="nvim"
@@ -60,20 +60,6 @@ pyenv() {
 
   command pyenv "$@"
 }
-
-# Enable nvm on-demand
-load_nvm() {
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-}
-nvm() {
-  load_nvm
-  nvm "$@"
-}
-
-# gcloud autocompletion
-[[ -f /opt/google-cloud-sdk/completion.zsh.inc ]] && source /opt/google-cloud-sdk/completion.zsh.inc
 
 # shrink pdf
 shrinkpdf() {

@@ -26,8 +26,9 @@ makelink() {
 
 # General
 makelink tmux.conf .tmux.conf
-makelink zshrc     .zshrc
 makelink gitconfig .gitconfig
+makelink zshrc     .zshrc
+makelink antigen   .config/antigen
 makelink nvim      .config/nvim
 makelink kitty     .config/kitty
 
