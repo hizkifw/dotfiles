@@ -1,8 +1,3 @@
-# If not in tmux, start tmux.
-if [[ -z ${TMUX+X}${ZSH_SCRIPT+X}${ZSH_EXECUTION_STRING+X} ]]; then
-  exec tmux
-fi
-
 # Load antigen
 source "$HOME/.config/antigen/antigen.zsh"
 
@@ -36,6 +31,16 @@ alias ssh="TERM=xterm-256color ssh"
 
 # vim
 alias vi="nvim"
+
+# Journal
+j() {
+  nvim -c 'Goyo 82' ~/Documents/journal/$(date +%F).md
+}
+jp() {
+  pushd ~/Documents/journal > /dev/null
+  git add -A && git commit -m "$@" && git push -u origin HEAD
+  popd > /dev/null
+}
 
 # global config
 export EDITOR="nvim"
