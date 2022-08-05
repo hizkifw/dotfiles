@@ -23,8 +23,11 @@ done
 alias t="tmux"
 alias k="kubectl"
 alias gpoh="git push -u origin HEAD"
+alias gmp="git checkout main && git pull"
+alias gac="git add -A && git commit"
 alias clip="xclip -selection clipboard"
 alias hl="highlight -O ansi -l"
+alias yayy="yay -Quq --aur | xargs -n 1 yay -S --noconfirm"
 
 # fix kitty ssh
 alias ssh="TERM=xterm-256color ssh"
@@ -34,13 +37,18 @@ alias vi="nvim"
 
 # Journal
 j() {
-  nvim -c 'Goyo 82' ~/Documents/journal/$(date +%F).md
+  pushd ~/Documents/journal > /dev/null
+  nvim -c 'Goyo 82' $(date +%F).md
+  popd > /dev/null
 }
 jp() {
   pushd ~/Documents/journal > /dev/null
   git add -A && git commit -m "$@" && git push -u origin HEAD
   popd > /dev/null
 }
+
+# lsof check used ports
+alias lsof-ports="sudo lsof -iTCP -sTCP:LISTEN -P -n"
 
 # global config
 export EDITOR="nvim"

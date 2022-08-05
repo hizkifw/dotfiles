@@ -4,7 +4,7 @@ Requires=checkupdates.service
 
 [Timer]
 Unit=checkupdates.service
-OnStartupSec=60
+OnStartupSec=300
 OnUnitActiveSec=3600
 
 [Install]
