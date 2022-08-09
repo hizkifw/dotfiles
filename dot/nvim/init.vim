@@ -73,6 +73,6 @@ set ffs=unix,dos,mac
 command! W exec 'w !sudo dd of=' . shellescape(expand('%'))
 
 " Load other configs
-source $HOME/.config/nvim/display.vim
 source $HOME/.config/nvim/keybindings.vim
 source $HOME/.config/nvim/plugins.vim
+source $HOME/.config/nvim/display.vim

@@ -2,7 +2,17 @@
 " Display
 " ===========================================================================
 
-colorscheme afterglow
+if has('termguicolors')
+    set termguicolors
+endif
+
+" let g:sonokai_style = 'default'
+" let g:sonokai_better_performance = 1
+" colorscheme sonokai
+
+set background=dark
+colorscheme PaperColor
+
 if $COLORTERM == 'gnome-terminal' || $VIM_COLORFUL == 1
     set t_Co=256
     " Fix weird colors on scroll

@@ -7,6 +7,10 @@ runtime! ftplugin/man.vim
 set rtp+=$HOME/.local/lib/python3.5/site-packages/powerline/bindings/vim/
 call plug#begin(vimhome . '/plugvim')
 
+" Colors
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'sheerun/vim-polyglot'
+
 " Utilities
 Plug 'tpope/vim-surround'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -29,18 +33,12 @@ Plug 'neoclide/coc.nvim', { 'do': 'yarn install' }
 Plug 'github/copilot.vim'
 
 " Typescript support
-Plug 'herringtondarkholme/yats.vim'
 Plug 'leafgarland/typescript-vim'
-Plug 'maxmellon/vim-jsx-pretty'
-Plug 'peitalin/vim-jsx-typescript'
 
 " Other languages
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'TovarishFin/vim-solidity'
-Plug 'OmniSharp/omnisharp-vim'
 Plug 'rust-lang/rust.vim'
-Plug 'clktmr/vim-gdscript3'
-Plug 'habamax/vim-godot'
 call plug#end()
 
 " NERDTree
@@ -99,10 +97,8 @@ let g:coc_global_extensions = [
     \   'coc-snippets',
     \   'coc-python',
     \   'coc-json',
-    \   'coc-omnisharp',
     \   'coc-rust-analyzer',
     \   'coc-deno',
-    \   'coc-r-lsp',
     \ ]
 
 " close all popups on esc
@@ -115,14 +111,8 @@ set signcolumn=yes
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#confirm() :
       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
+      \ copilot#Accept("\<Tab>")
+let g:copilot_no_tab_map = v:true
 let g:coc_snippet_next = '<tab>'
 
 " popup scrolling

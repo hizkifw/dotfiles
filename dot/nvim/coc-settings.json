@@ -3,6 +3,7 @@
   "tsserver.log": "verbose",
   "snippets.userSnippetsDirectory": "~/.config/nvim/snippets",
   "suggest.autoTrigger": "always",
+  "suggest.enablePreselect": true,
   "suggest.minTriggerInputLength": 0,
 
   "rust-analyzer.updates.prompt": false,
