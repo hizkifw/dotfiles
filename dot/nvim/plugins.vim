@@ -7,9 +7,11 @@ runtime! ftplugin/man.vim
 set rtp+=$HOME/.local/lib/python3.5/site-packages/powerline/bindings/vim/
 call plug#begin(vimhome . '/plugvim')
 
-" Colors
+" Display
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'sheerun/vim-polyglot'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " Utilities
 Plug 'tpope/vim-surround'
