@@ -11,6 +11,10 @@
   "rust-analyzer.procMacro.enable": false,
   "rust-analyzer.diagnostics.disabled": ["unresolved-proc-macro"],
 
+  "rust-analyzer.inlayHints.chainingHints.enable": false,
+  "rust-analyzer.inlayHints.typeHints.enable": false,
+  "rust-analyzer.inlayHints.parameterHints.enable": false,
+
   "languageserver": {
     "ccls": {
       "command": "ccls",
