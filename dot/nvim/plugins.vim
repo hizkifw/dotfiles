@@ -12,6 +12,8 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'sheerun/vim-polyglot'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'psliwka/vim-smoothie'
+Plug 'szw/vim-maximizer'
 
 " Utilities
 Plug 'tpope/vim-surround'
@@ -27,8 +29,6 @@ Plug 'psf/black', { 'branch': 'stable' }
 Plug 'airblade/vim-gitgutter'
 Plug 'diepm/vim-rest-console'
 Plug 'skywind3000/asyncrun.vim'
-Plug 'psliwka/vim-smoothie'
-Plug 'szw/vim-maximizer'
 
 " Code completion
 Plug 'neoclide/coc.nvim', { 'do': 'yarn install' }

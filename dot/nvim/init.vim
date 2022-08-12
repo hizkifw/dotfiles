@@ -62,6 +62,11 @@ try
 catch
 endtry
 
+" Use system clipboard
+if has('clipboard')
+    set clipboard=unnamedplus
+endif
+
 " Session options
 set sessionoptions=blank,winsize,tabpages,resize,buffers,help
 
