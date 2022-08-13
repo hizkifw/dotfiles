@@ -28,8 +28,6 @@ function! ToggleNERDTree()
 endfunction
 nmap <silent> <leader>n :call ToggleNERDTree()<cr>
 
-command! ReloadBuffers :bufdo e
-
 " Toggle Goyo
 nmap <silent> <leader>go :Goyo<cr>
 " Creating tabs and windows
@@ -38,23 +36,23 @@ nmap <silent> <leader>v :vsplit<cr>
 nmap <silent> <leader>e :split<cr>
 nmap          <leader><cr> <C-w>w
 " Moving around tabs and windows
+map <C-h> <C-W>h
 map <C-j> <C-W>j
 map <C-k> <C-W>k
-map <C-h> <C-W>h
 map <C-l> <C-W>l
+nmap <leader>gh <C-W>h
 nmap <leader>gj <C-W>j
 nmap <leader>gk <C-W>k
-nmap <leader>gh <C-W>h
 nmap <leader>gl <C-W>l
 nmap <leader>j gt
 nmap <leader>k gT
 nmap <leader>h :tabm -1<cr>
 nmap <leader>l :tabm +1<cr>
 " Basic window layout manipulation
-nmap <leader>sl <C-w>L
-nmap <leader>sk <C-w>K
-nmap <leader>sj <C-w>J
 nmap <leader>sh <C-w>H
+nmap <leader>sj <C-w>J
+nmap <leader>sk <C-w>K
+nmap <leader>sl <C-w>L
 nmap <up> :resize +2<cr>
 nmap <down> :resize -2<cr>
 nmap <right> :vertical resize +2<cr>
@@ -77,6 +75,10 @@ nmap <silent> <leader>gip :GitGutterPreviewHunk<cr>
 nmap <silent> <leader>mt :tabnew +terminal<cr>i
 nmap <silent> <leader>me :new    +terminal<cr>i
 nmap <silent> <leader>mv :vnew   +terminal<cr>i
+tnoremap <C-h> <C-\><C-n><C-W>h
+tnoremap <C-j> <C-\><C-n><C-W>j
+tnoremap <C-k> <C-\><C-n><C-W>k
+tnoremap <C-l> <C-\><C-n><C-W>l
 
 " Return to last edit position when opening files
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif

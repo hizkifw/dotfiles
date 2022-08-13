@@ -77,6 +77,9 @@ set ffs=unix,dos,mac
 " sudo save
 command! W exec 'w !sudo dd of=' . shellescape(expand('%'))
 
+" Close all other buffers
+command! BufOnly silent! execute "%bd|e#|bd#"
+
 " Load other configs
 source $HOME/.config/nvim/keybindings.vim
 source $HOME/.config/nvim/plugins.vim

@@ -39,7 +39,8 @@ set t_ZH=[3m
 set t_ZR=[23m
 
 " Neovide settings
-set guifont=FiraCode\ Nerd\ Font\ Mono:h11
+set guifont=FiraCode\ Nerd\ Font\ Mono:h10
 if exists("g:neovide")
     let g:neovide_cursor_animation_length=0.05
+    " let g:smoothie_enabled=v:false
 endif
