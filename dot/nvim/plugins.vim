@@ -157,5 +157,5 @@ nmap <F2> <Plug>(coc-rename)
 nmap <leader>do <Plug>(coc-codeaction)
 
 " Toggle comment
-nnoremap <C-3> :call nerdcommenter#Comment(0,"toggle")<CR>
-vnoremap <C-3> :call nerdcommenter#Comment(0,"toggle")<CR>
+nnoremap <silent> <C-3> :call nerdcommenter#Comment(0,"toggle")<CR>
+vnoremap <silent> <C-3> :call nerdcommenter#Comment(0,"toggle")<CR>

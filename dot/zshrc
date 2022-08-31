@@ -23,11 +23,11 @@ done
 alias t="tmux"
 alias k="kubectl"
 alias gpoh="git push -u origin HEAD"
-alias gmp="git checkout main && git pull"
+alias gmp="git fetch origin main:main && git checkout main"
 alias gac="git add -A && git commit"
 alias clip="xclip -selection clipboard"
 alias hl="highlight -O ansi -l"
-alias yayy="yay -Quq --aur | xargs -n 1 yay -S --noconfirm"
+alias yayy="yay -Quq --aur | xargs -n 1 nice -n 99 yay -S --noconfirm"
 
 # fix kitty ssh
 alias ssh="TERM=xterm-256color ssh"
