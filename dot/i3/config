@@ -3,13 +3,15 @@
 set $mod Mod1
 font pango:Fira Code 8
 
+set $scope systemd-run --user --scope --nice -5
+
 # Settings and applets
-exec --no-startup-id ~/.config/i3/setup.sh
+exec --no-startup-id $scope ~/.config/i3/setup.sh
 
 # Use pactl to adjust volume in PulseAudio.
 set $reload_volume ~/.config/i3/dunst-vol.sh
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $reload_volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $reload_volume
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $reload_volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $reload_volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $reload_volume
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $reload_volume
 
@@ -17,20 +19,21 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec $scope kitty -1
+bindsym Ctrl+Shift+Escape exec kitty /usr/bin/sh
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start rofi
-bindsym $mod+d exec "rofi -modi drun,run -show drun"
+bindsym $mod+d exec "$scope rofi -modi drun,run -show drun"
 
 # rofi calculator
-bindsym $mod+c exec "rofi -show calc -modi calc -no-show-match -no-sort"
+bindsym $mod+c exec "$scope rofi -show calc -modi calc -no-show-match -no-sort"
 
 # screenshots
-bindsym Print exec --no-startup-id flameshot screen -c
-bindsym Ctrl+Print exec --no-startup-id flameshot gui
+bindsym Print exec --no-startup-id $scope flameshot screen -c
+bindsym Ctrl+Print exec --no-startup-id $scope flameshot gui
 
 # focus window for e.g. notification actions
 focus_on_window_activation focus

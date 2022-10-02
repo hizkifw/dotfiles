@@ -24,6 +24,8 @@ set so=5
 set showcmd
 " Ruler at 80 chars and 120+
 let &colorcolumn="80,".join(range(120,999),",")
+" Hide command bar
+set cmdheight=0
 " Goyo width
 let g:goyo_width=82
 

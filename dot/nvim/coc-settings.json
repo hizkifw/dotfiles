@@ -15,6 +15,15 @@
   "rust-analyzer.inlayHints.typeHints.enable": false,
   "rust-analyzer.inlayHints.parameterHints.enable": false,
 
+  "coc.preferences.rootPatterns": [
+    "Cargo.lock",
+    ".git",
+    ".hg",
+    ".projections.json"
+  ],
+  "workspace.workspaceFolderCheckCwd": false,
+  "workspace.bottomUpFiletypes": ["*"],
+
   "languageserver": {
     "ccls": {
       "command": "ccls",
