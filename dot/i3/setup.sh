@@ -2,10 +2,15 @@
 
 hostname=$(hostnamectl hostname)
 
+# Run background processes using systemd
+daemonize() {
+  systemd-run --user -p Restart=on-failure --collect $@
+}
+
 # Bottom bar
-polybar bottom --reload &
+daemonize polybar bottom --reload
 # ibus daemon for input methods
-ibus-daemon -drxR
+daemonize ibus-daemon --replace --xim --restart
 # Swap escape and caps lock
 setxkbmap -option caps:escape
 # Set keyboard repeat rate
@@ -15,7 +20,7 @@ xset r rate 200 25
 # Wallpaper
 nitrogen --restore
 # Compositor
-picom --daemon
+daemonize picom --dbus
 
 # Touchpad configuration
 if [[ "$hostname" == "udon" ]]; then
@@ -24,15 +29,17 @@ if [[ "$hostname" == "udon" ]]; then
 fi
 
 # NetworkManager tray icon
-nm-applet &
+daemonize nm-applet
 # Notifications
-dunst &
+daemonize dunst
+# Listen for notifications from dbus
+daemonize systembus-notify
 # Screenshot utility
-flameshot &
+daemonize flameshot
 # Lock screen
-xss-lock --transfer-sleep-lock -- \
-  betterlockscreen --lock --off 10 &
+daemonize xss-lock --transfer-sleep-lock -- \
+  betterlockscreen --lock --off 10
+# Redshift daemon
+daemonize redshift-gtk -l 1.35:103.8
 # Thunar daemon
 thunar --daemon &
-# Redshift daemon
-redshift-gtk -l 1.35:103.8 &
