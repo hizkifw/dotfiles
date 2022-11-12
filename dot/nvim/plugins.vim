@@ -18,7 +18,7 @@ Plug 'szw/vim-maximizer'
 " Utilities
 Plug 'tpope/vim-surround'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'scrooloose/nerdtree'
+Plug 'santiagovrancovich/nerdtree', { 'branch': 'hotfix-issue-#1321' }
 Plug 'preservim/nerdcommenter'
 Plug 'alvan/vim-closetag'
 Plug 'junegunn/goyo.vim'
