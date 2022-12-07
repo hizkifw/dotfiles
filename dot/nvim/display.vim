@@ -27,9 +27,9 @@ let &colorcolumn="80,".join(range(120,999),",")
 " Goyo width
 let g:goyo_width=82
 
-" Highlight trailing spaces
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
+" Highlight all whitespace
+set list
+set listchars=tab:│\ ,extends:›,precedes:‹,nbsp:␣,trail:·,space:·
 
 " Search highlight
 set is
