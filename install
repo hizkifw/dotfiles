@@ -24,6 +24,30 @@ makelink() {
   ln -sv "$target" "$linkname"
 }
 
+ensure_packages() {
+  # Check if using arch
+  if ! command -v pacman &>/dev/null; then
+    return 0
+  fi
+
+  to_install=()
+  for package in "$@"; do
+    if ! pacman -Qi "$package" &>/dev/null; then
+      to_install+=("$package")
+    fi
+  done
+
+  if [[ "${#to_install[@]}" -gt 0 ]]; then
+    sudo pacman -S "${to_install[@]}"
+  fi
+}
+
+# Packages
+ensure_packages \
+  polybar rofi rofi-calc picom nitrogen dunst earlyoom flameshot redshift ibus \
+  thunar tumbler pacman-contrib tmux neofetch neovim xclip git python-pip \
+  systembus-notify network-manager-applet xss-lock udisks2 udiskie
+
 # General
 makelink tmux.conf .tmux.conf
 makelink gitconfig .gitconfig

@@ -220,7 +220,7 @@ label-muted-foreground = ${colors.primary}
 
 [module/temperature]
 type = internal/temperature
-thermal-zone = 9
+hwon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon3/temp1_input
 warn-temperature = 80
 
 format-prefix = "TEMP "

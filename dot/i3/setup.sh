@@ -41,5 +41,7 @@ daemonize xss-lock --transfer-sleep-lock -- \
   betterlockscreen --lock --off 10
 # Redshift daemon
 daemonize redshift-gtk -l 1.35:103.8
+# Automount
+daemonize udiskie
 # Thunar daemon
 thunar --daemon &
