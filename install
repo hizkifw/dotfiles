@@ -45,8 +45,9 @@ ensure_packages() {
 # Packages
 ensure_packages \
   polybar rofi rofi-calc picom nitrogen dunst earlyoom flameshot redshift ibus \
-  thunar tumbler pacman-contrib tmux neofetch neovim xclip git python-pip \
-  systembus-notify network-manager-applet xss-lock udisks2 udiskie
+  thunar tumbler ffmpegthumbnailer pacman-contrib tmux neofetch neovim xclip \
+  git python-pip systembus-notify network-manager-applet xss-lock \
+  udisks2 udiskie gvfs gvfs-mtp gvfs-smb
 
 # General
 makelink tmux.conf .tmux.conf
@@ -64,6 +65,7 @@ makelink i3status  .config/i3status
 makelink polybar   .config/polybar
 makelink rofi      .config/rofi
 makelink picom     .config/picom
+makelink xfce4     .config/xfce4
 
 makelink gtk-settings.ini .config/gtk-3.0/settings.ini
 

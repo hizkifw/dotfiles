@@ -128,8 +128,7 @@ bindsym $mod+Shift+r restart
 # exit i3
 bindsym $mod+Shift+BackSpace exec i3-msg exit && sleep 1 && killall Xorg
 # power off displays
-bindsym $mod+Shift+d exec --no-startup-id sleep 1 && xset dpms force off
-bindsym $mod+Shift+e exec --no-startup-id "loginctl lock-session; sleep 5 && xset dpms force off"
+bindsym $mod+Shift+e exec --no-startup-id sleep 0.5 && xset dpms force off
 
 # resize window
 mode "resize" {
