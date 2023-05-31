@@ -47,7 +47,7 @@ ensure_packages \
   polybar rofi rofi-calc picom nitrogen dunst earlyoom flameshot redshift ibus \
   thunar tumbler ffmpegthumbnailer pacman-contrib tmux neofetch neovim xclip \
   git python-pip systembus-notify network-manager-applet xss-lock \
-  udisks2 udiskie gvfs gvfs-mtp gvfs-smb
+  udisks2 udiskie gvfs gvfs-mtp gvfs-smb gnome-keyring libsecret
 
 # General
 makelink tmux.conf .tmux.conf

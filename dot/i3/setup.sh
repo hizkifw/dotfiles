@@ -2,6 +2,22 @@
 
 hostname=$(hostnamectl hostname)
 
+# Screen layout
+if [[ "$hostname" == "kotatsu" ]]; then
+  xrandr \
+    --output HDMI-1 \
+      --mode 1920x1080 \
+      --pos 0x0 \
+      --rotate normal \
+      --set "Broadcast RGB" "Full" \
+    --output HDMI-3 \
+      --primary \
+      --mode 1920x1080 \
+      --pos 1920x0 \
+      --rotate normal \
+      --set "Broadcast RGB" "Full"
+fi
+
 # Run background processes using systemd
 daemonize() {
   systemd-run --user -p Restart=on-failure --collect $@

@@ -32,7 +32,7 @@ Plug 'skywind3000/asyncrun.vim'
 
 " Code completion
 Plug 'neoclide/coc.nvim', { 'do': 'yarn install' }
-Plug 'github/copilot.vim'
+" Plug 'github/copilot.vim'
 
 " Typescript support
 Plug 'leafgarland/typescript-vim'

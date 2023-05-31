@@ -56,7 +56,7 @@ font-5 = "Noto Sans Mono CJK HK:style=Regular,Regular:size=8;2"
 
 modules-left = i3 xwindow
 modules-center = mpd
-modules-right = checkupdates pulseaudio memory temperature battery date
+modules-right = checkupdates pulseaudio memory temperature-sensors battery date
 
 tray-position = right
 tray-padding = 3
@@ -217,6 +217,13 @@ label-volume-foreground = ${root.foreground}
 
 label-muted = muted
 label-muted-foreground = ${colors.primary}
+
+[module/temperature-sensors]
+type = custom/script
+exec = "sensors coretemp-isa-0000 | grep Package | xargs | cut -d' ' -f4"
+interval = 1
+format-prefix = "TEMP "
+format-prefix-foreground = ${colors.foreground-alt}
 
 [module/temperature]
 type = internal/temperature

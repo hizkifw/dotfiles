@@ -1,5 +1,5 @@
 antigen use oh-my-zsh
-antigen theme robbyrussell
+antigen theme candy
 
 antigen bundle git
 antigen bundle command-not-found
