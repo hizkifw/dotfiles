@@ -34,7 +34,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
+      { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -55,7 +55,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',          opts = {} },
 
   {
     -- Adds git releated signs to the gutter, as well as utilities for managing changes
@@ -70,7 +70,8 @@ require('lazy').setup({
         changedelete = { text = '~' },
       },
       on_attach = function(bufnr)
-        vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk, { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
+        vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk,
+          { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
         vim.keymap.set('n', '<leader>gn', require('gitsigns').next_hunk, { buffer = bufnr, desc = '[G]o to [N]ext Hunk' })
         vim.keymap.set('n', '<leader>ph', require('gitsigns').preview_hunk, { buffer = bufnr, desc = '[P]review [H]unk' })
       end,
@@ -153,7 +154,7 @@ require('lazy').setup({
       vim.api.nvim_create_autocmd('User', {
         pattern = { 'GoyoLeave' },
         callback = function()
-          require('lualine').hide({unhide=true})
+          require('lualine').hide({ unhide = true })
           vim.wo.signcolumn = 'yes'
         end,
       })
@@ -167,7 +168,7 @@ require('lazy').setup({
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
     },
-    config = function ()
+    config = function()
       require('neo-tree').setup {}
     end,
   }
@@ -208,7 +209,7 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- Show trailing spaces
 vim.o.list = true
-vim.o.listchars = 'trail:·'
+vim.o.listchars = 'trail:·,tab:> '
 
 -- Disable line wrapping
 vim.o.wrap = false
@@ -233,9 +234,9 @@ vim.api.nvim_set_keymap('n', '<leader>w', ':w<cr>', { noremap = true, desc = '[w
 vim.api.nvim_set_keymap('n', '<leader>cl', ':clo<cr>', { noremap = true, desc = '[cl] Close' })
 
 -- Creating tabs and windows
-vim.api.nvim_set_keymap('n', '<leader>t', ':tab split<cr>', {silent = true})
-vim.api.nvim_set_keymap('n', '<leader>v', ':vsplit<cr>', {silent = true})
-vim.api.nvim_set_keymap('n', '<leader>e', ':split<cr>', {silent = true})
+vim.api.nvim_set_keymap('n', '<leader>t', ':tab split<cr>', { silent = true })
+vim.api.nvim_set_keymap('n', '<leader>v', ':vsplit<cr>', { silent = true })
+vim.api.nvim_set_keymap('n', '<leader>e', ':split<cr>', { silent = true })
 
 -- Moving around tabs and windows
 vim.api.nvim_set_keymap('', '<C-h>', '<C-W>h', {})
@@ -265,15 +266,15 @@ vim.api.nvim_set_keymap('n', '<left>', ':vertical resize -2<cr>', {})
 vim.api.nvim_set_keymap('', 'Y', 'y$', {})
 
 -- Terminal
-vim.api.nvim_set_keymap('n', '<leader>mt', ':tabnew +terminal<cr>i', {silent = true})
-vim.api.nvim_set_keymap('n', '<leader>me', ':new    +terminal<cr>i', {silent = true})
-vim.api.nvim_set_keymap('n', '<leader>mv', ':vnew   +terminal<cr>i', {silent = true})
+vim.api.nvim_set_keymap('n', '<leader>mt', ':tabnew +terminal<cr>i', { silent = true })
+vim.api.nvim_set_keymap('n', '<leader>me', ':new    +terminal<cr>i', { silent = true })
+vim.api.nvim_set_keymap('n', '<leader>mv', ':vnew   +terminal<cr>i', { silent = true })
 
 -- Ctrl+hjkl exits terminal mode and focues on other panes
-vim.api.nvim_set_keymap('t', '<C-h>', '<C-\\><C-n><C-w>h', {noremap = true})
-vim.api.nvim_set_keymap('t', '<C-j>', '<C-\\><C-n><C-w>j', {noremap = true})
-vim.api.nvim_set_keymap('t', '<C-k>', '<C-\\><C-n><C-w>k', {noremap = true})
-vim.api.nvim_set_keymap('t', '<C-l>', '<C-\\><C-n><C-w>l', {noremap = true})
+vim.api.nvim_set_keymap('t', '<C-h>', '<C-\\><C-n><C-w>h', { noremap = true })
+vim.api.nvim_set_keymap('t', '<C-j>', '<C-\\><C-n><C-w>j', { noremap = true })
+vim.api.nvim_set_keymap('t', '<C-k>', '<C-\\><C-n><C-w>k', { noremap = true })
+vim.api.nvim_set_keymap('t', '<C-l>', '<C-\\><C-n><C-w>l', { noremap = true })
 
 -- Open file explorer
 vim.api.nvim_set_keymap('n', '<leader>n', ":Neotree reveal toggle<CR>", { noremap = true })
@@ -297,7 +298,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
     vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, opts)
     vim.keymap.set({ 'n', 'v' }, '<space>do', vim.lsp.buf.code_action, opts)
   end,
@@ -361,7 +361,7 @@ end, { desc = '[/] Fuzzily search in current buffer' })
 vim.keymap.set('n', '<c-p>', require('telescope.builtin').git_files)
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
+vim.keymap.set('n', '<leader>se', require('telescope.builtin').help_tags, { desc = '[S]earch H[e]lp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
@@ -456,7 +456,6 @@ local on_attach = function(_, bufnr)
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -478,7 +477,7 @@ local servers = {
   pyright = {},
   rust_analyzer = {},
   tsserver = {},
-  html = { filetypes = { 'html', 'twig', 'hbs'} },
+  html = { filetypes = { 'html', 'twig', 'hbs' } },
 
   lua_ls = {
     Lua = {
