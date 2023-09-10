@@ -5,11 +5,11 @@ hostname=$(hostnamectl hostname)
 # Screen layout
 if [[ "$hostname" == "kotatsu" ]]; then
   xrandr \
-    --output HDMI-1-0 \
+    --output HDMI-0 \
       --mode 1920x1080 \
       --pos 0x0 \
       --rotate normal \
-    --output DP-1-1 \
+    --output DP-1 \
       --primary \
       --mode 1920x1080 \
       --pos 1920x0 \
