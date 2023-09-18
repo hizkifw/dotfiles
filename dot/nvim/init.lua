@@ -162,14 +162,22 @@ require('lazy').setup({
   },
 
   {
-    "nvim-neo-tree/neo-tree.nvim",
-    version = "*",
+    -- File browser
+    'nvim-tree/nvim-tree.lua',
+    version = '*',
     dependencies = {
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
+      'nvim-tree/nvim-web-devicons',
     },
     config = function()
-      require('neo-tree').setup {}
+      -- Disable netrw
+      vim.g.loaded_netrw       = 1
+      vim.g.loaded_netrwPlugin = 1
+      -- Set up nvim-tree
+      require('nvim-tree').setup({
+        filters = {
+          dotfiles = true
+        }
+      })
     end,
   },
 
@@ -281,7 +289,7 @@ vim.api.nvim_set_keymap('t', '<C-k>', '<C-\\><C-n><C-w>k', { noremap = true })
 vim.api.nvim_set_keymap('t', '<C-l>', '<C-\\><C-n><C-w>l', { noremap = true })
 
 -- Open file explorer
-vim.api.nvim_set_keymap('n', '<leader>n', ":Neotree reveal toggle<CR>", { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>n', ":NvimTreeFindFileToggle<CR>", { noremap = true })
 
 --
 -- LSP Keybindings
