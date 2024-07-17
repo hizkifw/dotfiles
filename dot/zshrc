@@ -1,6 +1,8 @@
 # Load antigen
 source "$HOME/.config/antigen/antigen.zsh"
 
+[ -f ~/.zshrc.local ] && . ~/.zshrc.local
+
 # Configure plugins
 export NVM_LAZY_LOAD=true
 export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim' 'vim')
@@ -23,6 +25,8 @@ done
 alias t="tmux"
 alias k="kubectl"
 alias gpoh="git push -u origin HEAD"
+alias gs="git status"
+alias gl="git --no-pager log --graph --oneline -n 10"
 alias gmp="git fetch origin main:main && git checkout main"
 alias gac="git add -A && git commit"
 alias clip="xclip -selection clipboard"

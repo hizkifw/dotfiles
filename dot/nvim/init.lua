@@ -183,6 +183,14 @@ require('lazy').setup({
 
   {
     "towolf/vim-helm"
+  },
+
+  {
+    -- OpenAI
+    "aduros/ai.vim",
+    config = function()
+      vim.g.ai_completions_model = "gpt-3.5-turbo-instruct"
+    end
   }
 }, {})
 

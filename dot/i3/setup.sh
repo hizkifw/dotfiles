@@ -34,7 +34,7 @@ xset r rate 200 25
 # Wallpaper
 nitrogen --restore
 # Compositor
-daemonize picom --dbus
+daemonize picom --dbus --no-vsync --backend glx
 
 # Touchpad configuration
 if [[ "$hostname" == "udon" ]]; then
@@ -51,10 +51,10 @@ daemonize systembus-notify
 # Screenshot utility
 daemonize flameshot
 # Lock screen
-daemonize xss-lock --transfer-sleep-lock -- \
-  betterlockscreen --lock --off 10
+# daemonize xss-lock --transfer-sleep-lock -- \
+#   betterlockscreen --lock --off 10
 # Redshift daemon
-daemonize redshift-gtk -l 1.35:103.8
+# daemonize redshift-gtk -l 1.35:103.8
 # Automount
 daemonize udiskie
 # Thunar daemon
