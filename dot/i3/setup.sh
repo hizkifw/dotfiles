@@ -27,6 +27,8 @@ daemonize polybar bottom --reload
 daemonize ibus-daemon --replace --xim --restart
 # Swap escape and caps lock
 setxkbmap -option caps:escape
+# Swap alt and win key
+setxkbmap -option altwin:swap_alt_win
 # Set keyboard repeat rate
 xset r rate 200 25
 # Disable mouse acceleration
